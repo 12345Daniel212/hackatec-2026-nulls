@@ -1394,3 +1394,45 @@ body {
     gap: 12px;
   }
 }
+
+
+
+
+/* ==========================================================================
+   EFECTO DE BRILLO ULTRA RÁPIDO PARA LA PALABRA IA (ESTILO GEMINI VELOZ)
+   ========================================================================== */
+.ai-brillo {
+  font-weight: 800;
+  background: linear-gradient(45deg,
+      #4285f4,
+      /* Azul */
+      #9b51e0,
+      /* Morado */
+      #e91e63,
+      /* Rosado */
+      #00f2fe,
+      /* Cyan extra para más destello */
+      #4285f4
+      /* Cierre */
+    );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* De 4s bajó a 1.2s y con 'linear' para que no desacelere */
+  animation: brilloGeminiRapido 2.2s linear infinite;
+
+  text-shadow: 0 0 15px rgba(155, 81, 224, 0.3);
+}
+
+@keyframes brilloGeminiRapido {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 300% 50%;
+    /* Forzamos un barrido completo continuo */
+  }
+}
