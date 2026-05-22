@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnCamino | Red de Distribución Logística</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <i class="fa-solid fa-bars menu-burger"></i>
+      <div class="logo-container" onclick="window.location.reload()">
+        <img src="tu-logo.png" alt="EnCamino Logo" class="brand-logo-img">
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-link-partner"><i class="fa-solid fa-truck-ramp-box"></i> Convertirse en Operador</a>
+      <button class="btn-nav btn-login">Iniciar sesión</button>
+      <button class="btn-nav btn-register">Regístrate</button>
+    </div>
+  </nav>
+
+  <main class="hero-container">
+
+    <div class="main-card">
+      <h1>Cotizar con IA a dónde vas a mandar tu paquete</h1>
+
+      <div class="search-bar-grid">
+
+        <div class="input-wrapper">
+          <i class="fa-solid fa-box-archive"></i>
+          <input type="text" class="input-uber" id="direccion-origen" placeholder="Ingresa la dirección de entrega">
+        </div>
+
+        <div class="input-wrapper">
+          <i class="fa-solid fa-truck-fast"></i>
+          <select class="input-uber select-uber">
+            <option value="ahora">Despachar ahora</option>
+            <option value="programado">Programar recolección</option>
+          </select>
+          <i class="fa-solid fa-chevron-down text-arrow"></i>
+        </div>
+
+      </div>
+
+      <button class="btn-submit-uber" onclick="redirigirAlCotizador()">
+        Calcular Envío <i class="fa-solid fa-arrow-right icon-flecha"></i>
+      </button>
+
+      <div class="action-container">
+        <a class="secondary-action" onclick="alert('Abriendo portal para Socios de Centros de Distribución (Hubs)...')">
+          Registrarme como centro de distribución
+        </a>
+      </div>
+
+    </div>
+
+    <div class="promo-footer-banner" id="promo-banner">
+      <div class="promo-left">
+        <i class="fa-solid fa-circle-notch logo-promo"></i>
+        <span>Costo de envío preferencial con EnCamino Corporate.</span>
+      </div>
+      <i class="fa-solid fa-xmark close-promo"
+        onclick="document.getElementById('promo-banner').style.display='none'"></i>
+    </div>
+
+  </main>
+
+  <script>
+    function redirigirAlCotizador() {
+      const direccion = document.getElementById('direccion-origen').value;
+      if (!direccion) {
+        alert("Por favor, ingresa una dirección de destino para calcular el flete.");
+        return;
+      }
+      alert("Conectando con el Cotizador Geométrico Volumétrico IA para la ruta: " + direccion);
+    }
+  </script>
+
+</body>
+
+</html>
