@@ -18,8 +18,7 @@
       </div>
     </div>
     <div class="nav-right">
-
-      <button class="btn-nav btn-login">Iniciar sesión</button>
+      <button class="btn-nav btn-login" onclick="window.location.href='registroCel.html'">Iniciar sesión</button>
       <a href="registro.html" class="btn-nav btn-register">Regístrate</a>
     </div>
   </nav>
@@ -71,8 +70,8 @@
         onclick="document.getElementById('promo-banner').style.display='none'"></i>
     </div>
   </header>
-  <section class="uber-cards-section">
 
+  <section class="uber-cards-section">
     <div class="uber-card">
       <div class="card-image-box">
         <img src="https://images.pexels.com/photos/6169668/pexels-photo-6169668.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -99,7 +98,6 @@
       <h3>Haz entregas con la app de EnCamino</h3>
       <a href="#" class="uber-card-link">Regístrate para realizar entregas</a>
     </div>
-
   </section>
 
   <section class="uber-map-section">
@@ -159,7 +157,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -181,7 +178,6 @@
         alert("Por favor, ingresa una dirección de destino para calcular el flete.");
         return;
       }
-      // Redirección directa mandando los datos ingresados por parámetro de URL
       window.location.href = "cotizador.html?direccion=" + encodeURIComponent(direccion);
     }
 
