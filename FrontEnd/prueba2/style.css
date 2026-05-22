@@ -658,3 +658,170 @@ body {
     padding: 24px;
   }
 }
+/* ==========================================================================
+   PANTALLA DE REGISTRO CON ANIMACIÓN SLIDER TIPO VIDEO
+   ========================================================================== */
+.registro-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 72px);
+  margin-top: 72px;
+  background-color: #f8f9fa;
+  padding: 0 20px;
+}
+
+/* El contenedor principal que enmascara todo */
+.slider-container {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+  width: 900px;
+  max-width: 100%;
+  min-height: 550px;
+  animation: slideUpFade 0.8s ease forwards;
+}
+
+/* Estilos internos de los formularios */
+.registro-form {
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+.registro-form h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px;}
+.form-subtitle { color: #666; font-size: 14px; margin-bottom: 30px; }
+
+/* Contenedores de cada formulario (50% de ancho) */
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+/* Estado base del Vendedor (Visible a la izquierda) */
+.vendedor-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+/* Estado base del Micro-Hub (Oculto) */
+.microhub-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* CLASES ACTIVAS (Cuando el JS entra en acción) */
+.slider-container.right-panel-active .vendedor-container {
+  transform: translateX(100%);
+}
+
+.slider-container.right-panel-active .microhub-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: showForm 0.6s;
+}
+
+@keyframes showForm {
+  0%, 49.99% { opacity: 0; z-index: 1; }
+  50%, 100% { opacity: 1; z-index: 5; }
+}
+
+/* EL PANEL OSCURO DESLIZANTE (El Overlay) */
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.slider-container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+/* El fondo negro del Overlay */
+.overlay {
+  background: #000000;
+  background: linear-gradient(135deg, #000000, #222222);
+  color: #FFFFFF;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.slider-container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+/* Lados internos del Overlay */
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay-panel h2 { font-size: 28px; margin-bottom: 15px;}
+.overlay-panel p { font-size: 15px; margin-bottom: 30px; line-height: 1.5; color: #ccc;}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.slider-container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.slider-container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+/* Botón transparente del Overlay */
+.btn-overlay {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 8px;
+  padding: 12px 30px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-overlay:hover {
+  background-color: #FFFFFF;
+  color: #000000;
+}

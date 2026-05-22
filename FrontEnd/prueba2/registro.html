@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnCamino | Registro</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo-container" onclick="window.location.href='index.html'">
+        <img src="../Imagenes/enCaminoLogo.svg" alt="EnCamino Logo" class="brand-logo-img">
+      </div>
+    </div>
+    <div class="nav-right">
+      <span style="font-size: 14px; font-weight: 600; color: #666;">Selecciona tu rol en la red</span>
+    </div>
+  </nav>
+
+  <main class="registro-body">
+    
+    <div class="slider-container" id="sliderContainer">
+      
+      <div class="form-container microhub-container">
+        <form action="#" class="registro-form">
+          <h1>Registro Micro-Hub</h1>
+          <p class="form-subtitle">Convierte tu negocio en un punto de acopio</p>
+          
+          <div class="input-wrapper">
+            <i class="fa-solid fa-store"></i>
+            <input type="email" class="input-uber" placeholder="Email de tu negocio">
+          </div>
+          <div class="input-wrapper" style="margin-top: 15px;">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" class="input-uber" placeholder="Contraseña">
+          </div>
+          
+          <button type="button" class="btn-submit-uber" style="margin-top: 25px;" onclick="window.location.href='dashboard.html'">
+            Crear cuenta Micro-Hub
+          </button>
+        </form>
+      </div>
+
+      <div class="form-container vendedor-container">
+        <form action="#" class="registro-form">
+          <h1>Registro Vendedor</h1>
+          <p class="form-subtitle">Comienza a enviar de forma inteligente</p>
+          
+          <div class="input-wrapper">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" class="input-uber" placeholder="Tu correo electrónico">
+          </div>
+          <div class="input-wrapper" style="margin-top: 15px;">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" class="input-uber" placeholder="Contraseña">
+          </div>
+          
+          <button type="button" class="btn-submit-uber" style="margin-top: 25px;" onclick="window.location.href='dashboard.html'">
+            Crear cuenta Vendedor
+          </button>
+        </form>
+      </div>
+
+      <div class="overlay-container">
+        <div class="overlay">
+          
+          <div class="overlay-panel overlay-left">
+            <h2>¿Eres un Emprendedor?</h2>
+            <p>Si envías paquetes constantemente, únete como vendedor y cotiza con IA.</p>
+            <button class="btn-overlay" id="btnSoyVendedor">Soy Vendedor</button>
+          </div>
+          
+          <div class="overlay-panel overlay-right">
+            <h2>¿Tienes un negocio local?</h2>
+            <p>Monetiza tu espacio libre resguardando paquetes de tu colonia.</p>
+            <button class="btn-overlay" id="btnSoyMicrohub">Soy Micro-Hub</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    const btnSoyVendedor = document.getElementById('btnSoyVendedor');
+    const btnSoyMicrohub = document.getElementById('btnSoyMicrohub');
+    const sliderContainer = document.getElementById('sliderContainer');
+
+    // Al darle clic a Soy Micro-Hub, agrega la clase que mueve el panel a la izquierda
+    btnSoyMicrohub.addEventListener('click', () => {
+      sliderContainer.classList.add("right-panel-active");
+    });
+
+    // Al darle clic a Soy Vendedor, quita la clase y el panel regresa a la derecha
+    btnSoyVendedor.addEventListener('click', () => {
+      sliderContainer.classList.remove("right-panel-active");
+    });
+  </script>
+
+</body>
+</html>
