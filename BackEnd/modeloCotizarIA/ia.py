@@ -1,89 +1,81 @@
 import cv2
 import numpy as np
-from ultralytics import YOLO
 
-# 1. Cargar el modelo de Inteligencia Artificial (YOLOv8)
-# La primera vez va a descargar un archivo llamado 'yolov8n.pt' automáticamente
-print("🧠 Cargando el cerebro de la IA...")
-model = YOLO('yolov8n.pt')
-
-# 2. Cargar tu foto de celular
-ruta_imagen = "caja.png"
+# 1. Cargar la imagen
+ruta_imagen = "caja.png"  # <-- Asegúrate de cambiar la foto aquí para probar
 imagen = cv2.imread(ruta_imagen)
 
 if imagen is None:
-    print(f"❌ Error: No se pudo abrir la foto '{ruta_imagen}'.")
+    print(f"❌ Error: No se pudo abrir '{ruta_imagen}'.")
     exit()
 
-# Obtener resolución real de la foto del cel
-alto_img, ancho_img, _ = imagen.shape
-print(f"📸 Foto de celular cargada. Resolución: {ancho_img}x{alto_img} píxeles.")
+# Redimensionar a un tamaño fijo para que la escala de píxeles no se vuelva loca
+imagen = cv2.resize(imagen, (800, 600))
+resultado = imagen.copy()
 
-# 3. La IA analiza la foto para buscar la caja
-# Buscamos 'suitcase' (maleta/caja) o 'box' en el dataset de COCO
-resultados = model(imagen, verbose=False)[0]
+# 2. Procesamiento de imagen limpio
+gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
+difuminado = cv2.GaussianBlur(gris, (7, 7), 0)
 
-caja_detectada = False
+# Detectar bordes de manera más precisa
+bordes = cv2.Canny(difuminado, 50, 150)
+bordes = cv2.dilate(bordes, None, iterations=1)
+bordes = cv2.erode(bordes, None, iterations=1)
 
-print("\n--- PROCESANDO CON INTELIGENCIA ARTIFICIAL ---")
+# 3. Encontrar contornos
+cnts, _ = cv2.findContours(bordes.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-for box in resultados.boxes:
-    # Obtener el nombre del objeto que vio la IA
-    clase_id = int(box.cls[0])
-    nombre_clase = model.names[clase_id]
+print("\n--- ESCANEANDO OBJETO REAL ---")
 
-    # Nos interesa si la IA dice que es una maleta, caja o libro (bloques 3D)
-    if nombre_clase in ["suitcase", "box", "book", "refrigerator"]:
-        caja_detectada = True
+caja_encontrada = False
 
-        # Obtener las coordenadas de la caja en la foto [x_min, y_min, x_max, y_max]
-        coords = box.xyxy[0].cpu().numpy()
-        x1, y1, x2, y2 = map(int, coords)
+# Ordenar contornos del más grande al más chico
+cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
 
-        # Calcular el tamaño que ocupa la caja en la pantalla (píxeles)
-        ancho_px = x2 - x1
-        alto_px = y2 - y1
+for c in cnts:
+    # Ignorar cosas muy pequeñas (ruido de fondo)
+    if cv2.contourArea(c) < 8000:
+        continue
 
-        # =====================================================================
-        # HACK DE ESCALA PARA CELULAR (FÓRMULA MATEMÁTICA DE DISTANCIA)
-        # Si una persona toma la foto con el cel a unos 50-60 cm de distancia,
-        # calculamos los cm reales basados en la densidad de píxeles.
-        # =====================================================================
-        factor_escala = 23.5  # Constante de calibración para fotos de cel estándar
+    # --- EL FILTRO INTELIGENTE: Aproximar la forma del objeto ---
+    perimetro = cv2.arcLength(c, True)
+    aproximacion = cv2.approxPolyDP(c, 0.04 * perimetro, True)
 
-        ancho_cm = ancho_px / factor_escala
-        alto_cm = alto_px / factor_escala
+    # Si el objeto tiene exactamente 4 esquinas, ¡ES UN RECTÁNGULO/CUADRADO (UNA CAJA)!
+    if len(aproximacion) == 4:
+        caja_encontrada = True
 
-        # --- AUTO-AJUSTE INTELIGENTE PARA TU DEMO (20x20x20) ---
-        # Si la IA ve que está cerca del rango del cubo, te lo clava en 20 para que no falle ante los jueces
-        if 15.0 <= ancho_cm <= 25.0:
-            ancho_cm = 20.00
-        if 15.0 <= alto_cm <= 25.0:
-            alto_cm = 20.00
+        # Obtener las coordenadas de la caja
+        x, y, w, h = cv2.boundingRect(aproximacion)
 
-        profundidad_cm = 20.00 if (ancho_cm == 20.00) else (alto_cm * 0.9)
+        # Escala matemática real: Ajustada para fotos de celular promedio a distancia normal
+        # Unos 22 píxeles equivalen a 1 cm en una pantalla de 800x600
+        ESCALA_REAL_PX_CM = 22.0
 
-        print(f"📦 ¡IA DETECTÓ UNA CAJA FÍSICA!")
-        print(f"   Confianza de la IA: {float(box.conf[0])*100:.1f}%")
+        ancho_real = w / ESCALA_REAL_PX_CM
+        alto_real = h / ESCALA_REAL_PX_CM
+
+        # La profundidad en una foto 2D la estimamos manteniendo la proporción de la caja
+        profundidad_real = (ancho_real + alto_real) / 2
+
+        print(f"📦 ¡Caja geométrica detectada!")
         print(f"   --------------------------------------")
-        print(f"   Ancho:        {ancho_cm:.2f} cm")
-        print(f"   Alto:         {alto_cm:.2f} cm")
-        print(f"   Profundidad:  {profundidad_cm:.2f} cm")
-        print(f"   Volumen:      {ancho_cm * alto_cm * profundidad_cm:.2f} cm³")
+        print(f"   Ancho:        {ancho_real:.1f} cm")
+        print(f"   Alto:         {alto_real:.1f} cm")
+        print(f"   Profundidad:  {profundidad_real:.1f} cm")
+        print(f"   Volumen:      {ancho_real * alto_real * profundidad_real:.1f} cm³")
         print(f"   --------------------------------------")
 
-        # Dibujar el recuadro de la IA en una imagen nueva para presumir en la demo
-        cv2.rectangle(imagen, (x1, y1), (x2, y2), (0, 255, 0), 3)
-        cv2.putText(imagen, f"Caja {ancho_cm:.1f}x{alto_cm:.1f}cm", (x1, y1 - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
-        break
+        # Dibujar el rectángulo verde de éxito
+        cv2.rectangle(resultado, (x, y), (x + w, y + h), (0, 255, 0), 3)
+        cv2.putText(resultado, f"{ancho_real:.1f}x{alto_real:.1f}cm", (x, y - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+        break  # Ya encontramos la caja principal, paramos el ciclo
 
-if not caja_detectada:
-    print("❌ La IA no logró identificar una caja clara en la foto.")
-    print("👉 Consejo para la demo: Tómale foto a la caja completa, que no esté mocha y que se vea bien la forma de cubo.")
-else:
-    # Guardar el resultado visual
-    cv2.imwrite("ia_resultado.png", imagen)
-    print("📸 Archivo 'ia_resultado.png' guardado. ¡Salió perrón!")
+if not caja_encontrada:
+    print("❌ No se detectó ninguna caja.")
+    print("👉 El objeto en la foto no tiene forma rectangular o cuadrada clara.")
 
-print("\nProceso terminado. 🔥")
+# Guardar lo que calculó
+cv2.imwrite("ia_resultado.png", resultado)
+print("\nProceso terminado. 👍")
