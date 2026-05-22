@@ -181,7 +181,8 @@
         alert("Por favor, ingresa una dirección de destino para calcular el flete.");
         return;
       }
-      alert("Conectando con el Cotizador Geométrico Volumétrico IA para la ruta: " + direccion);
+      // Redirección directa mandando los datos ingresados por parámetro de URL
+      window.location.href = "cotizador.html?direccion=" + encodeURIComponent(direccion);
     }
 
     function toggleTracking() {

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnCamino | Cotizador IA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style3.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo-container" onclick="window.location.href='index.html'">
+        <img src="../Imagenes/enCaminoLogo.svg" alt="EnCamino Logo" class="brand-logo-img">
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="btn-nav btn-login">Iniciar sesión</button>
+      <a href="registro.html" class="btn-nav btn-register">Regístrate</a>
+    </div>
+  </nav>
+
+  <main class="cotizador-container">
+    <div class="cotizador-grid">
+
+      <section class="panel-scanner">
+        <div class="address-selected-badge">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <span>Destino seleccionado:</span>
+            <strong id="destino-texto">Cargando dirección...</strong>
+          </div>
+        </div>
+
+        <h2>Escáner Volumétrico con <span class="ai-brillo">IA</span></h2>
+        <p class="scanner-desc">Sube la foto de tu caja para que la IA calcule sus dimensiones. El peso deberás
+          ingresarlo manualmente.</p>
+
+        <div class="peso-input-container" style="margin-bottom: 20px;">
+          <label style="display:block; font-size:14px; font-weight:600; margin-bottom: 8px; color:#333;">
+            <i class="fa-solid fa-weight-hanging"></i> Peso estimado del paquete (kg):
+          </label>
+          <input type="number" id="peso-paquete" class="input-uber" value="1" min="1"
+            style="padding-left: 20px; height: 48px;" onchange="recubicarPrecios()">
+        </div>
+
+        <div class="dropzone-camara" onclick="document.getElementById('file-input').click()">
+          <input type="file" id="file-input" accept="image/*" style="display:none" onchange="simularEscaneo(event)">
+
+          <div id="preview-placeholder">
+            <i class="fa-solid fa-camera-retro icon-camara"></i>
+            <p><strong>Haz clic para tomar foto o subir tu caja</strong></p>
+            <span>La IA forzará medidas < 20cm para activar el súper precio</span>
+          </div>
+
+          <div id="preview-image-container" style="display: none;">
+            <img id="box-preview" src="" alt="Predicción de caja">
+            <div class="laser-scanner-line"></div>
+            <div class="ai-dimensions-tag" id="tag-dimensiones">Calculando...</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-resultados">
+        <h3>Resumen de Cotización</h3>
+
+        <div class="card-precio-vacia" id="card-vacia">
+          <i class="fa-solid fa-box-open"></i>
+          <p>Sube una foto de tu paquete para generar los precios de flete automatizados.</p>
+        </div>
+
+        <div class="card-precio-calculado" id="card-resultados" style="display: none;">
+          <div class="precio-row">
+            <div class="precio-info">
+              <h4>Tarifa Estándar Público</h4>
+              <p id="detalle-medidas">Caja Chica (Menor a 20x20x20 cm)</p>
+            </div>
+            <div class="precio-monto" id="precio-publico">$90.00</div>
+          </div>
+
+          <div class="precio-row vip-row">
+            <div class="precio-info">
+              <h4>Tarifa EnCamino Premium <i class="fa-solid fa-crown"></i></h4>
+              <p>Precio especial con tu suscripción activa</p>
+            </div>
+            <div class="precio-monto vip-monto" id="precio-suscripcion">$82.00</div>
+          </div>
+
+          <div class="ahorro-badge" id="ahorro-texto">¡Ahorraste $8.00 con la suscripción!</div>
+
+          <button class="btn-submit-uber" style="margin-top: 24px;"
+            onclick="alert('¡Pedido confirmado! Tu recolector va en camino al domicilio seleccionado.')">
+            Confirmar y Solicitar Recolección <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-bottom">
+      <p>© 2026 EnCamino Logística S.A. de C.V. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // 1. CAPTURAR Y MANTENER EL DOMICILIO DEL INDEX
+    const urlParams = new URLSearchParams(window.location.search);
+    const destino = urlParams.get('direccion') || "Dirección predeterminada (No se ingresó ninguna)";
+    document.getElementById('destino-texto').innerText = destino;
+
+    // Variables globales para guardar los costos bases calculados
+    let precioBaseNormal = 90;
+    let precioBaseSubs = 82;
+    let esCajaChicaGlobal = true;
+
+    function simularEscaneo(event) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          document.getElementById('preview-placeholder').style.display = 'none';
+          document.getElementById('preview-image-container').style.display = 'block';
+          document.getElementById('box-preview').src = e.target.result;
+
+          document.getElementById('tag-dimensiones').innerText = "IA: Escaneando caja...";
+
+          // Efecto de carga del láser de la IA
+          setTimeout(() => {
+            // EXPLICITO: Forzamos a que mida menos de 20x20x20 en la primera simulación
+            let medX = 15;
+            let medY = 18;
+            let medZ = 12;
+
+            precioBaseNormal = 90;
+            precioBaseSubs = 82;
+            esCajaChicaGlobal = true;
+
+            // Inyectamos las medidas en la interfaz
+            document.getElementById('tag-dimensiones').innerText = `IA: ${medX}x${medY}x${medZ} cm`;
+            document.getElementById('detalle-medidas').innerText = `Caja Chica (${medX}x${medY}x${medZ} cm) ocre de tarifa fija`;
+
+            // Renderizar los precios base multiplicados por el peso introducido
+            recubicarPrecios();
+
+            // Desplegar las tarjetas de cotización
+            document.getElementById('card-vacia').style.display = 'none';
+            document.getElementById('card-resultados').style.display = 'block';
+          }, 1500);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    // Calcular el precio final sumando o multiplicando por el peso que meta el usuario
+    function recubicarPrecios() {
+      const peso = parseFloat(document.getElementById('peso-paquete').value) || 1;
+
+      // Si el peso es mayor a 1, le sumamos un extra progresivo de $10 pesos por kilo adicional
+      let extraPeso = (peso - 1) * 10;
+      if (extraPeso < 0) extraPeso = 0;
+
+      let finalNormal = precioBaseNormal + extraPeso;
+      let finalSubs = precioBaseSubs + extraPeso;
+
+      // REGLA: Si cuenta con suscripción premium, el precio jamás superará los $100 pesos (Tope máximo)
+      if (finalSubs > 100) {
+        finalSubs = 100;
+      }
+
+      // Imprimir resultados en pantalla
+      document.getElementById('precio-publico').innerText = `$${Math.floor(finalNormal)}.00`;
+      document.getElementById('precio-suscripcion').innerText = `$${Math.floor(finalSubs)}.00`;
+      document.getElementById('ahorro-texto').innerText = `¡Ahorras $${Math.floor(finalNormal - finalSubs)}.00 con la suscripción Premium!`;
+    }
+  </script>
+</body>
+
+</html>
