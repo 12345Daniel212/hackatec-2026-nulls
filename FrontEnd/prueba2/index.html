@@ -26,24 +26,14 @@
     </div>
   </nav>
 
-  <main class="hero-container">
-
+  <header class="hero-container">
     <div class="main-card">
       <h1>Cotizar con IA a dónde vas a mandar tu paquete</h1>
 
-      <div class="search-bar-grid">
+      <div class="search-bar-full">
         <div class="input-wrapper">
           <i class="fa-solid fa-box-archive"></i>
           <input type="text" class="input-uber" id="direccion-origen" placeholder="Ingresa la dirección de entrega">
-        </div>
-
-        <div class="input-wrapper">
-          <i class="fa-solid fa-truck-fast"></i>
-          <select class="input-uber select-uber">
-            <option value="ahora">Despachar ahora</option>
-            <option value="programado">Programar recolección</option>
-          </select>
-          <i class="fa-solid fa-chevron-down text-arrow"></i>
         </div>
       </div>
 
@@ -83,8 +73,101 @@
       <i class="fa-solid fa-xmark close-promo"
         onclick="document.getElementById('promo-banner').style.display='none'"></i>
     </div>
+  </header>
 
-  </main>
+  <section class="uber-cards-section">
+    <div class="uber-card">
+      <div class="card-image-box">
+        <img src="https://images.pexels.com/photos/6169668/pexels-photo-6169668.jpeg?auto=compress&cs=tinysrgb&w=600"
+          alt="Corporativo">
+      </div>
+      <h3>Envíos masivos para tus empleados</h3>
+      <a href="#" class="uber-card-link">Crear una cuenta corporativa</a>
+    </div>
+
+    <div class="uber-card">
+      <div class="card-image-box">
+        <img src="https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg?auto=compress&cs=tinysrgb&w=600"
+          alt="Tu Centro">
+      </div>
+      <h3>Tu centro de distribución, a domicilio</h3>
+      <a href="#" class="uber-card-link">Agrega tu Hub a la red</a>
+    </div>
+
+    <div class="uber-card">
+      <div class="card-image-box">
+        <img src="https://images.pexels.com/photos/6169046/pexels-photo-6169046.jpeg?auto=compress&cs=tinysrgb&w=600"
+          alt="Operador">
+      </div>
+      <h3>Haz entregas con la app de EnCamino</h3>
+      <a href="#" class="uber-card-link">Regístrate para realizar entregas</a>
+    </div>
+  </section>
+
+  <section class="uber-map-section">
+    <div class="map-header">
+      <h2>Centros de distribución cerca de mí</h2>
+      <a href="#" class="map-link">Conoce nuestros más de 50 Hubs</a>
+    </div>
+
+    <div class="map-container-box"
+      style="position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+
+      <div class="map-wrapper" style="width: 100%; height: 100%;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d118844.75783307567!2d-104.8948127!3d21.5039276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1710000000000!5m2!1ses-419!2smx"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <div class="live-marker">
+        <i class="fa-solid fa-warehouse"></i>
+        <div class="pulse"></div>
+      </div>
+
+      <div class="tracking-floating-card"
+        style="top: 24px; left: 24px; position: absolute; max-width: 360px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+        <div class="tracking-header">
+          <div>
+            <h2>Hub Central Tepic</h2>
+            <p>Código: #HUB-NTE-2026</p>
+          </div>
+          <span class="status-badge">Activo</span>
+        </div>
+
+        <div class="driver-info" style="padding: 12px;">
+          <div class="driver-avatar"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <div class="driver-details">
+            <h4>Paquetes en tránsito</h4>
+            <p>Tepic y Zona Metropolitana</p>
+          </div>
+        </div>
+
+        <hr class="divider" style="margin: 16px 0;">
+
+        <div class="timeline">
+          <div class="timeline-step completed">
+            <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="step-text">
+              <strong>Entradas Verificadas</strong>
+              <p>Clasificación automatizada completada</p>
+            </div>
+          </div>
+          <div class="timeline-step active">
+            <div class="step-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+            <div class="step-text">
+              <strong>Rutas de Despacho</strong>
+              <p>Unidades en carga pesada</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <p>© 2026 EnCamino Logística S.A. de C.V. Todos los derechos reservados.</p>
+  </footer>
 
   <script>
     function redirigirAlCotizador() {
@@ -96,13 +179,10 @@
       alert("Conectando con el Cotizador Geométrico Volumétrico IA para la ruta: " + direccion);
     }
 
-    // NUEVAS FUNCIONES PARA EL RASTREO
     function toggleTracking() {
       const slideboard = document.getElementById('slideboardRastreo');
-      // Alternar la clase 'active' para que baje o suba
       slideboard.classList.toggle('active');
 
-      // Si se abre, enfocar el input automáticamente
       if (slideboard.classList.contains('active')) {
         setTimeout(() => {
           document.getElementById('codigo-rastreo').focus();
@@ -116,7 +196,7 @@
         alert("Debes ingresar un código de rastreo válido.");
         return;
       }
-      alert("Buscando el estado del paquete: " + codigo + " en la base de datos de Tepic...");
+      alert("Buscando el estado del paquete: " + codigo + " en la base de datos...");
     }
   </script>
 
