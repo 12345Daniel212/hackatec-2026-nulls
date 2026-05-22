@@ -106,7 +106,7 @@
       object-fit: cover;
     }
 
-    /* CONTROLES DE ESTATUS (SWITCH STYLE iOS) */
+    /* CONTROLES DE ESTATUS */
     .status-controller-wrapper {
       display: flex;
       align-items: center;
@@ -127,7 +127,6 @@
       transition: all 0.2s ease;
     }
 
-    /* Clases de estado dinámicas */
     .status-open {
       background: rgba(52, 199, 89, 0.1);
       color: #1e6b30;
@@ -236,6 +235,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
+      margin-bottom: 28px;
     }
 
     .card {
@@ -291,7 +291,6 @@
     .capacity-bar-fill {
       height: 100%;
       width: 75%;
-      /* Empieza en 75% directo */
       background: linear-gradient(90deg, #007AFF, #00c6ff);
       border-radius: 50px;
       transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -320,6 +319,12 @@
       font-size: 46px;
       font-weight: 800;
       margin: 8px 0 24px 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .wallet-box h1.pop-effect {
+      transform: scale(1.1);
+      color: var(--accent-green);
     }
 
     .wallet-box h1 span {
@@ -338,6 +343,104 @@
       font-size: 14px;
       background: #ffffff;
       color: #000;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-withdraw:disabled {
+      background: #333;
+      color: #777;
+      cursor: not-allowed;
+    }
+
+    /* LIVE FEED / HISTORIAL EN VIVO */
+    .feed-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0 0 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feed-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 220px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .feed-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.02);
+      font-size: 14px;
+      font-weight: 600;
+      animation: fadeInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* ANIMACIÓN POP PARA NÚMEROS */
+    .counter-pop {
+      animation: microPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes microPop {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+        color: var(--accent-blue);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* EFECTO CONFETTI */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      border-radius: 50%;
+      z-index: 999;
+      pointer-events: none;
+      animation: fall 2s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     /* REVEAL ANIMATIONS */
@@ -352,6 +455,10 @@
 
     .d2 {
       animation-delay: 0.1s;
+    }
+
+    .d3 {
+      animation-delay: 0.15s;
     }
 
     @keyframes fadeUp {
@@ -435,7 +542,7 @@
         </div>
         <p class="capacity-text">
           <i class="fa-solid fa-box" style="margin-right: 4px; color: #444;"></i>
-          <span id="percentage-text">75%</span> ocupado
+          <span id="percentage-text" style="display:inline-block;">75%</span> ocupado
           <span style="font-weight:700; color:#000;" id="count-text">(15/20 paquetes)</span>
         </p>
       </div>
@@ -444,48 +551,90 @@
         <p
           style="margin:0; opacity:0.65; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px;">
           Billetera Digital</p>
-        <h1>$4,250.00 <span>MXN</span></h1>
-        <button class="btn-withdraw">
-          <i class="fa-solid fa-money-bill-transfer" style="margin-right: 6px;"></i> Retirar Fondos
+        <h1 id="wallet-amount">$4,250.00 <span>MXN</span></h1>
+        <button class="btn-withdraw" id="btn-withdraw-funds" onclick="executeWithdrawal()">
+          <i class="fa-solid fa-money-bill-transfer" id="withdraw-icon"></i> <span id="withdraw-text">Retirar
+            Fondos</span>
         </button>
       </div>
+    </div>
 
+    <div class="card reveal d3" style="padding: 30px;">
+      <h3 class="feed-title">
+        <i class="fa-solid fa-satellite-dish" style="color: var(--accent-blue); animation: blink 1.5s infinite;"></i>
+        Monitor de Actividad en Tiempo Real
+      </h3>
+      <div class="feed-container" id="live-feed-container">
+        <div class="feed-item">
+          <span><i class="fa-solid fa-circle-check" style="color:var(--accent-green); margin-right:8px;"></i> Sistema
+            iniciado correctamente.</span>
+          <span style="color:#888; font-size:12px;">08:30 AM</span>
+        </div>
+      </div>
     </div>
 
   </main>
 
   <script>
-    // Variables globales (Inician directo con el valor por defecto: 15 de 20)
     let currentPackages = 15;
     const maxCapacity = 20;
 
-    // Función directa para actualizar el inventario al tocar botones
+    // Agregar un nuevo log dinámico al feed del Monitor en tiempo real
+    function addLiveLog(message, isAddition = true) {
+      const feedContainer = document.getElementById('live-feed-container');
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+      const icon = isAddition
+        ? `<i class="fa-solid fa-arrow-down-long" style="color:var(--accent-blue); margin-right:8px;"></i>`
+        : `<i class="fa-solid fa-arrow-up-long" style="color:var(--accent-orange); margin-right:8px;"></i>`;
+
+      const logItem = document.createElement('div');
+      logItem.className = 'feed-item';
+      logItem.innerHTML = `<span>${icon} ${message}</span> <span style="color:#888; font-size:12px;">${timeStr}</span>`;
+
+      // Insertar al inicio de la lista flotante
+      feedContainer.insertBefore(logItem, feedContainer.firstChild);
+    }
+
+    // Actualizar volumen de paquetes + Animación táctil
     function updatePackages(amount) {
       let target = currentPackages + amount;
 
-      // Validar límites entre 0 y el máximo
       if (target >= 0 && target <= maxCapacity) {
         currentPackages = target;
-
-        // Calcular porcentaje matemático real
         let percentage = Math.round((currentPackages / maxCapacity) * 100);
 
-        // Renderizar cambios visuales directos en el DOM
         const bar = document.getElementById('capacity-bar');
-        document.getElementById('percentage-text').innerText = percentage + '%';
+        const pText = document.getElementById('percentage-text');
+
+        // Efecto físico elástico al número
+        pText.classList.remove('counter-pop');
+        void pText.offsetWidth; // Forzar reflow mágico de CSS
+        pText.classList.add('counter-pop');
+
+        pText.innerText = percentage + '%';
         document.getElementById('count-text').innerText = '(' + currentPackages + '/' + maxCapacity + ' paquetes)';
         bar.style.width = percentage + '%';
 
-        // Alerta visual de color si se llena de más
+        // Lógica de colores adaptativa
         if (percentage >= 90) {
           bar.style.background = 'linear-gradient(90deg, #FF9500, #FF3B30)';
         } else {
           bar.style.background = 'linear-gradient(90deg, #007AFF, #00c6ff)';
         }
+
+        // Registrar en el log en tiempo real
+        let randomId = Math.floor(100000 + Math.random() * 900000);
+        if (amount > 0) {
+          addLiveLog(`Paquete #ENC-${randomId} ingresado en andén de resguardo.`, true);
+        } else {
+          addLiveLog(`Paquete entregado a repartidor de ruta colaborativa.`, false);
+        }
       }
     }
 
-    // Función directa para alternar estatus del switch
+    // Toggle de Estatus Tienda Abierta/Cerrada
     function toggleStoreStatus() {
       const toggle = document.getElementById('status-toggle');
       const badge = document.getElementById('hub-status-badge');
@@ -494,11 +643,59 @@
       if (toggle.checked) {
         badge.className = "status-hub-tag status-open";
         text.innerText = "Estatus: Abierto / Activo";
+        addLiveLog("Establecimiento marcado como ABIERTO. Listo para recibir carga flete.", true);
       } else {
         badge.className = "status-hub-tag status-closed";
         text.innerText = "Estatus: Cerrado / Inactivo";
+        addLiveLog("Establecimiento cerrado. Alertas de ruteo IA pausadas.", false);
       }
     }
+
+    // Simular transferencia de fondos Stripe + Confetti Burst
+    function executeWithdrawal() {
+      const btn = document.getElementById('btn-withdraw-funds');
+      const icon = document.getElementById('withdraw-icon');
+      const txt = document.getElementById('withdraw-text');
+      const amount = document.getElementById('wallet-amount');
+
+      // Animación de loading simulado
+      btn.disabled = true;
+      icon.className = "fa-solid fa-circle-notch fa-spin";
+      txt.innerText = "Procesando SPEI masivo...";
+
+      setTimeout(() => {
+        // Limpiar saldo con animación de impacto
+        amount.classList.add('pop-effect');
+        amount.innerHTML = "$0.00 <span>MXN</span>";
+
+        icon.className = "fa-solid fa-circle-check";
+        txt.innerText = "Fondos transferidos";
+        addLiveLog("Retiro exitoso de $4,250.00 MXN vía SPEI al banco del titular.", true);
+
+        // ¡Disparar ráfaga de confetti!
+        for (let i = 0; i < 60; i++) {
+          createConfetti();
+        }
+      }, 1500);
+    }
+
+    // Generador de partículas de Confetti puro
+    function createConfetti() {
+      const colors = ['#007AFF', '#34C759', '#FF9500', '#FF3B30', '#FFD60A'];
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.transform = `scale(${Math.random() * 1.2})`;
+      confetti.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3000);
+    }
+
+    // Renderizado inicial suave
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('capacity-bar').style.width = '75%';
+    });
   </script>
 </body>
 
