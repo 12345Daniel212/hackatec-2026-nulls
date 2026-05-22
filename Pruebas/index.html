@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnCamino - Logística Colaborativa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === ESTILOS MODO OSCURO (ESTILO UBER) === */
+        :root {
+            --bg-color: #000000;
+            --card-bg: #1A1A1A;
+            --text-main: #FFFFFF;
+            --text-muted: #A6A6A6;
+            --btn-primary-bg: #FFFFFF;
+            --btn-primary-text: #000000;
+            --btn-hover: #E2E2E2;
+            --input-bg: #2C2C2C;
+            --border-radius: 8px;
+            --accent-blue: #007AFF; /* Azul para la cajita */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        /* Estilo modificado para el título con el icono */
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px; /* Espacio entre la cajita y el texto */
+        }
+
+        /* Color de la cajita azul */
+        h1 i {
+            color: var(--accent-blue);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* Ocultar secciones por defecto */
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Formularios */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--input-bg);
+            border: 1px solid transparent;
+            color: var(--text-main);
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--text-main);
+            outline: none;
+        }
+
+        /* Botones */
+        button {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--btn-primary-bg);
+            color: var(--btn-primary-text);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--btn-hover);
+        }
+
+        .btn-text {
+            background: none;
+            color: var(--text-main);
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .btn-text:hover {
+            background: none;
+            text-decoration: underline;
+        }
+
+        /* Layout de dos columnas para registro */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .col {
+            background-color: #222222;
+            padding: 30px;
+            border-radius: var(--border-radius);
+        }
+
+        .col h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="view-login" class="section active">
+            <h1><i class="fa-solid fa-cube"></i> EnCamino</h1>
+            <p class="subtitle">Logística Colaborativa Inteligente</p>
+            
+            <div style="max-width: 400px; margin: 0 auto;">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" placeholder="ejemplo@correo.com">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <button onclick="iniciarSesion()">Inicio de Sesión</button>
+                <button class="btn-text" onclick="cambiarVista('view-register')">¿No tienes cuenta? Regístrate aquí</button>
+            </div>
+        </div>
+
+        <div id="view-register" class="section">
+            <h1>Creación de Cuenta</h1>
+            <p class="subtitle">Elige cómo quieres unirte a la red colaborativa</p>
+            
+            <div class="grid-2">
+                <div class="col">
+                    <h2>Soy Vendedor</h2>
+                    <div class="form-group">
+                        <label>Email (Vendedor)</label>
+                        <input type="email" placeholder="tu@negocio.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••">
+                    </div>
+                    <button onclick="cambiarVista('view-phone')">Continuar</button>
+                </div>
+
+                <div class="col">
+                    <h2>Soy Micro-Hub</h2>
+                    <div class="form-group">
+                        <label>Email (Punto de Recolección)</label>
+                        <input type="email" placeholder="contacto@tiendita.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••">
+                    </div>
+                    <button onclick="cambiarVista('view-phone')">Continuar</button>
+                </div>
+            </div>
+            
+            <button class="btn-text" onclick="cambiarVista('view-login')">← Volver al inicio de sesión</button>
+        </div>
+
+        <div id="view-phone" class="section">
+            <h1>Casi listos</h1>
+            <p class="subtitle">Datos de contacto</p>
+            
+            <div style="max-width: 400px; margin: 0 auto;">
+                <div class="form-group">
+                    <label>Ingresa tu número de teléfono</label>
+                    <input type="tel" placeholder="+52 (000) 000 0000">
+                </div>
+                <button onclick="finalizarRegistro()">Finalizar Registro</button>
+                <button class="btn-text" onclick="cambiarVista('view-register')">← Volver atrás</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cambiarVista(idVista) {
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(idVista).classList.add('active');
+        }
+
+        function iniciarSesion() {
+            alert("Iniciando sesión... Aquí conectaremos con la Base de Datos.");
+        }
+
+        function finalizarRegistro() {
+            alert("¡Cuenta creada con éxito! Redirigiendo al sistema...");
+            cambiarVista('view-login');
+        }
+    </script>
+</body>
+</html>
