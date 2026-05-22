@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnCamino | Rastreo en Vivo</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="overflow: hidden;"> 
+  
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo-container" onclick="window.location.href='index.html'">
+        <img src="../Imagenes/enCaminoLogo.svg" alt="EnCamino Logo" class="brand-logo-img">
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-link-partner"><i class="fa-solid fa-truck-ramp-box"></i> Registrarme como centro de distribución</a>
+      <button class="btn-nav btn-login">Iniciar sesión</button>
+      <button class="btn-nav btn-register">Regístrate</button>
+    </div>
+  </nav>
+
+  <main class="tracking-container">
+    
+    <div class="map-wrapper">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119330.4140026362!2d-104.9818815!3d21.5034606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842736c3470baefb%3A0xc6ba2df721245b00!2sTepic%2C%20Nay.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" 
+        width="100%" 
+        height="100%" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <div class="live-marker">
+        <div class="pulse"></div>
+        <i class="fa-solid fa-truck-fast"></i>
+      </div>
+    </div>
+
+    <div class="tracking-floating-card">
+      <div class="tracking-header">
+        <div>
+          <h2>Llegada estimada: 14:30 hrs</h2>
+          <p>Código: <strong style="color: #000;">#ENC-847291</strong></p>
+        </div>
+        <div class="status-badge">En Vivo</div>
+      </div>
+
+      <div class="driver-info">
+        <div class="driver-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+        <div class="driver-details">
+          <h4>Roberto (Ruta Colaborativa)</h4>
+          <p>Nissan NP300 • Placas NZ-1234</p>
+        </div>
+        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="timeline">
+        <div class="timeline-step completed">
+          <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+          <div class="step-text">
+            <strong>Recibido en HubLocal</strong>
+            <p>Abarrotes Doña Mary - 09:15 hrs</p>
+          </div>
+        </div>
+        
+        <div class="timeline-step active">
+          <div class="step-icon"><i class="fa-solid fa-truck-arrow-right"></i></div>
+          <div class="step-text">
+            <strong>En camino a destino</strong>
+            <p>Ruta optimizada en Tepic Centro</p>
+          </div>
+        </div>
+
+        <div class="timeline-step pending">
+          <div class="step-icon"><i class="fa-solid fa-house-chimney"></i></div>
+          <div class="step-text">
+            <strong>Entrega final</strong>
+            <p>Av. México #450, Centro</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
