@@ -225,7 +225,7 @@
       }, 400);
     }
 
-    // Envía los datos limpios y listos directamente a la pasarela de pagos
+    // Envía los datos limpios y listos directamente al panel del vendedor
     function finalizarRegistro() {
       const nombre = document.getElementById('input-nombre').value;
       const apellido = document.getElementById('input-apellido').value;
@@ -235,11 +235,8 @@
         return;
       }
 
-      // Codificamos la dirección para evitar problemas con espacios o caracteres especiales en la URL
-      const dirCodificada = encodeURIComponent(direccion);
-
-      // Redirección directa pasando todos los datos de la cotización a pagos.html
-      window.location.href = `pagos.html?direccion=${dirCodificada}&base=${base}&pesoExtra=${pesoExtra}&total=${total}`;
+      // Redirección directa hacia el archivo vendedor.html
+      window.location.href = "vendedor.html";
     }
   </script>
 
