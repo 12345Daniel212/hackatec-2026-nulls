@@ -255,9 +255,14 @@ body {
   transform: translateX(6px);
 }
 
-/* LINK DE REGISTRO DE CENTRO DE DISTRIBUCIÓN */
+/* LINK DE REGISTRO DE CENTRO DE DISTRIBUCIÓN Y RASTREO */
 .action-container {
-  margin-top: 24px;
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center;    /* Centra todos los textos perfectamente */
+  gap: 16px;              /* Espacio entre los enlaces */
+  width: 100%;
 }
 
 .secondary-action {
@@ -268,6 +273,15 @@ body {
   text-decoration: none;
   position: relative;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+/* Color especial para que resalte el botón de rastreo */
+.track-action {
+  color: #555555; 
+}
+.track-action:hover {
+  color: #000000;
 }
 
 .secondary-action::after {
@@ -288,6 +302,38 @@ body {
   transform-origin: bottom left;
 }
 
+/* EFECTO SLIDEBOARD DE RASTREO (El acordeón perrón) */
+.tracking-slideboard {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Transform para que parezca que baja suavemente desde arriba */
+  transform: translateY(-10px); 
+}
+
+/* Cuando se le agrega la clase activa por Javascript */
+.tracking-slideboard.active {
+  max-height: 100px; /* Suficiente espacio para el input */
+  opacity: 1;
+  margin-top: 8px;
+  transform: translateY(0);
+}
+
+.tracking-input-group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+/* El botoncito negro cuadrado para buscar el rastreo */
+.btn-track {
+  width: 56px; 
+  height: 56px;
+  flex-shrink: 0;
+  padding: 0;
+}
 /* ==========================================================================
    5. FOOTER DE PROMOCIONES (Tono café ocre/dorado de Uber One)
    ========================================================================== ////// */

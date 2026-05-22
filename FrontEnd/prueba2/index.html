@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="nav-right">
-      <a href="#" class="nav-link-partner"><i class="fa-solid fa-truck-ramp-box"></i> Convertirse en Operador</a>
+      <a href="#" class="nav-link-partner"><i class="fa-solid fa-truck-ramp-box"></i> Registrarme como centro de distribución</a>
       <button class="btn-nav btn-login">Iniciar sesión</button>
       <button class="btn-nav btn-register">Regístrate</button>
     </div>
@@ -32,7 +32,6 @@
       <h1>Cotizar con IA a dónde vas a mandar tu paquete</h1>
 
       <div class="search-bar-grid">
-
         <div class="input-wrapper">
           <i class="fa-solid fa-box-archive"></i>
           <input type="text" class="input-uber" id="direccion-origen" placeholder="Ingresa la dirección de entrega">
@@ -46,7 +45,6 @@
           </select>
           <i class="fa-solid fa-chevron-down text-arrow"></i>
         </div>
-
       </div>
 
       <button class="btn-submit-uber" onclick="redirigirAlCotizador()">
@@ -57,17 +55,31 @@
         <a class="secondary-action" onclick="alert('Abriendo portal para Socios de Centros de Distribución (Hubs)...')">
           Registrarme como centro de distribución
         </a>
-      </div>
+        
+        <a class="secondary-action track-action" onclick="toggleTracking()">
+          <i class="fa-solid fa-location-crosshairs"></i> Rastrear un pedido
+        </a>
 
-    </div>
+        <div class="tracking-slideboard" id="slideboardRastreo">
+          <div class="tracking-input-group">
+            <div class="input-wrapper" style="width: 100%;">
+              <i class="fa-solid fa-barcode"></i>
+              <input type="text" class="input-uber" id="codigo-rastreo" placeholder="Ingresa tu código de rastreo (#ENC-...)">
+            </div>
+            <button class="btn-submit-uber btn-track" onclick="rastrearPedido()">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
 
     <div class="promo-footer-banner" id="promo-banner">
       <div class="promo-left">
         <i class="fa-solid fa-circle-notch logo-promo"></i>
         <span>Costo de envío preferencial con EnCamino Corporate.</span>
       </div>
-      <i class="fa-solid fa-xmark close-promo"
-        onclick="document.getElementById('promo-banner').style.display='none'"></i>
+      <i class="fa-solid fa-xmark close-promo" onclick="document.getElementById('promo-banner').style.display='none'"></i>
     </div>
 
   </main>
@@ -80,6 +92,29 @@
         return;
       }
       alert("Conectando con el Cotizador Geométrico Volumétrico IA para la ruta: " + direccion);
+    }
+
+    // NUEVAS FUNCIONES PARA EL RASTREO
+    function toggleTracking() {
+      const slideboard = document.getElementById('slideboardRastreo');
+      // Alternar la clase 'active' para que baje o suba
+      slideboard.classList.toggle('active');
+      
+      // Si se abre, enfocar el input automáticamente
+      if(slideboard.classList.contains('active')){
+        setTimeout(() => {
+          document.getElementById('codigo-rastreo').focus();
+        }, 300);
+      }
+    }
+
+    function rastrearPedido() {
+      const codigo = document.getElementById('codigo-rastreo').value;
+      if (!codigo) {
+        alert("Debes ingresar un código de rastreo válido.");
+        return;
+      }
+      alert("Buscando el estado del paquete: " + codigo + " en la base de datos de Tepic...");
     }
   </script>
 
