@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashBox Logistics | Sobre Nosotros</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* 1. RESETEO Y CONFIGURACIÓN GENERAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #101622 0%, #080b11 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .sidebar .menu-toggle {
+            font-size: 24px;
+            cursor: pointer;
+            color: #3b82f6; /* Azul eléctrico */
+        }
+
+        .sidebar .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+
+        /* 3. CONTENEDOR PRINCIPAL (Mueve todo a la derecha de la barra lateral) */
+        .main-container {
+            margin-left: 70px;
+            width: calc(100% - 70px);
+        }
+
+        /* 4. ENCABEZADO / MENÚ SUPERIOR */
+        .navbar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 25px 50px;
+            gap: 35px;
+            z-index: 90;
+        }
+
+        .navbar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover, .navbar a.active {
+            color: #ffffff;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 4px;
+        }
+
+        /* 5. HERO BANNER (Sección de la foto de fondo) */
+        .hero-banner {
+            height: 45vh;
+            position: relative;
+            /* Imagen de un camión/logística de alta calidad de Unsplash */
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(16, 22, 34, 1)), 
+                        url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 60px 40px 60px;
+        }
+
+        .hero-banner h1 {
+            font-size: 60px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            line-height: 1;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* 6. SECCIÓN DE INFORMACIÓN (Dos Columnas) */
+        .content-section {
+            padding: 60px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+        }
+
+        /* Columna Izquierda: Texto informativo */
+        .info-text h2 {
+            font-size: 32px;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .info-text h2 span {
+            display: block;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .info-text p {
+            color: #94a3b8;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Columna Derecha: Imagen secundaria y contacto */
+        .info-aside {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .aside-card {
+            background-color: #1e293b;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .aside-card img {
+            width: 100%;
+            border-radius: 4px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .aside-card p {
+            font-size: 13px;
+            color: #94a3b8;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            text-align: center;
+            font-size: 14px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .contact-details .phone {
+            font-size: 18px;
+            color: #3b82f6; /* Resalte en azul */
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="main-container">
+        
+        <nav class="navbar">
+            <a href="#">Cotizar</a>
+            <a href="#">Crear Cuenta</a>
+            <a href="#" class="active">Sobre Nosotros</a>
+        </nav>
+
+        <div class="hero-banner">
+            <h1>EN-CAMINO</h1>
+        </div>
+
+        <div class="content-section">
+            
+            <div class="info-text">
+                <h2>SOBRE <span>NOSOTROS.</span></h2>
+                <p>
+                    Descripcion de la empresa
+                </p>
+                <p>
+                    Aqui va la innovacion
+                </p>
+            </div>
+
+            <div class="info-aside">
+                <div class="aside-card">
+                    <img src="Imagen" alt="">
+                    <p>Servicio de Distribucion</p>
+                    
+                    <div class="contact-details">
+                        <div class="phone">01 800 000 000</div>
+                        <div>Direccion</div>
+                        <div>Direccion</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

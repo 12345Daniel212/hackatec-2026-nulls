@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Elegante</title>
+    
+    <style>
+        /* Estilos generales para centrar la tarjeta en la pantalla */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #4A1525; /* Fondo vino oscuro como el borde de tu imagen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* La tarjeta blanca del login */
+        .login-card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px; /* Bordes redondeados */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra suave para dar profundidad */
+            width: 350px;
+            text-align: center;
+        }
+
+        /* Título "LOGIN" */
+        .login-card h2 {
+            color: #7A2048; /* Color magenta/vino del diseño */
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* Grupo de inputs (contenedor) */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* Los campos de texto (Email y Password) */
+        .input-group input {
+            width: 100%;
+            padding: 10px 5px;
+            border: none;
+            border-bottom: 2px solid #ccc; /* Línea gris inferior */
+            outline: none;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        /* Efecto cuando el usuario hace clic en el input */
+        .input-group input:focus {
+            border-bottom: 2px solid #7A2048; /* La línea cambia al color vino */
+        }
+
+        /* Botón de ingresar */
+        .btn-login {
+            background-color: #B03A6A; /* Rosa encendido del botón de tu imagen */
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px; /* Súper redondeado */
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(176, 58, 106, 0.3);
+            transition: background 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #7A2048; /* Se oscurece al pasar el cursor */
+        }
+
+        /* Mensaje de error/éxito */
+        #mensaje {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>LOGIN</h2>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Correo Electrónico" required>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Contraseña" required>
+            </div>
+            
+            <button type="submit" class="btn-login">INGRESAR</button>
+        </form>
+
+        <div id="mensaje"></div>
+    </div>
+
+    <script>
+        // Capturamos el formulario y el área de mensaje usando sus ID
+        const form = document.getElementById('loginForm');
+        const mensaje = document.getElementById('mensaje');
+
+        // Escuchamos el momento en que el usuario da clic en "INGRESAR"
+        form.addEventListener('submit', function(event) {
+            // Evitamos que la página se recargue (comportamiento por defecto)
+            event.preventDefault(); 
+
+            // Obtenemos los valores que escribió el usuario
+            const emailTxt = document.getElementById('email').value;
+            const passwordTxt = document.getElementById('password').value;
+
+            // Simulamos una validación funcional básica
+            if (emailTxt === "usuario@correo.com" && passwordTxt === "123456") {
+                mensaje.style.color = "green";
+                mensaje.textContent = "¡Inicio de sesión exitoso! Bienvenido.";
+                form.reset(); // Limpia los campos
+            } else {
+                mensaje.style.color = "red";
+                mensaje.textContent = "Correo o contraseña incorrectos. Intenta de nuevo.";
+            }
+        });
+    </script>
+
+</body>
+</html>
