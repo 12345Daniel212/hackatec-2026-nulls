@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnCamino | Panel Vendedor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root { --card-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    
+    body { 
+      font-family: 'Inter', sans-serif; 
+      margin: 0; 
+      min-height: 100vh;
+      /* FONDO DE CAJAS NEUTRAS CON OVERLAY OSCURO PARA CONTRASTE */
+      background-image: linear-gradient(rgba(240, 242, 245, 0.85), rgba(240, 242, 245, 0.85)), 
+                        url('https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .navbar { 
+      display: flex; justify-content: space-between; align-items: center; 
+      padding: 20px 80px; background: rgba(255, 255, 255, 0.9); 
+      backdrop-filter: blur(10px); border-bottom: 1px solid #eee; 
+    }
+    .logo-container img { height: 45px; }
+
+    .dashboard-container { max-width: 1000px; margin: 40px auto; padding: 20px; }
+
+    .card { 
+      background: rgba(255, 255, 255, 0.85); 
+      backdrop-filter: blur(20px); 
+      border-radius: 28px; 
+      padding: 35px; 
+      margin-bottom: 25px; 
+      border: 1px solid rgba(255,255,255,0.4);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card:hover { transform: translateY(-5px); }
+
+    .reveal { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.2s; } .d3 { animation-delay: 0.3s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo-container" style="cursor:pointer" onclick="location.href='index.html'">
+       <img src="../Imagenes/enCaminoLogo.svg" alt="EnCamino">
+    </div>
+    <button onclick="location.href='index.html'" style="border:none; background:none; font-weight:700; cursor:pointer;">Cerrar sesión</button>
+  </nav>
+
+  <main class="dashboard-container">
+    
+    <div class="card reveal">
+      <div style="display:flex; align-items:center; gap:25px;">
+        <div style="width:85px; height:85px; background:#000; color:#fff; border-radius:22px; display:grid; place-items:center; font-size:28px;">CV</div>
+        <div>
+          <h2 style="margin:0; font-size:28px;">Kevin Inda Vendedor</h2>
+          <p style="margin:8px 0; color:#777; font-weight:500;">ID: EN-9921 | <span style="background:#000; color:#fff; padding:4px 12px; border-radius:8px; font-size:11px; letter-spacing:1px;">NIVEL ORO</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="card reveal d1"><h3>12</h3><p>En tránsito</p></div>
+      <div class="card reveal d2"><h3>48</h3><p>Entregados</p></div>
+      <div class="card reveal d3"><h3>3</h3><p>Pendientes</p></div>
+    </div>
+
+    <div class="card reveal d3">
+      <h3 style="margin-top:0;">Últimos movimientos</h3>
+      <table style="width:100%; border-collapse:collapse; margin-top:20px;">
+        <tr style="color:#888; font-size:12px; text-transform:uppercase;"><th>Paquete</th><th>Estatus</th><th>Fecha</th></tr>
+        <tr style="border-bottom:1px solid #eee;"><td>#ENC-001</td><td style="color:#007AFF;">En Ruta</td><td>22 Mayo</td></tr>
+        <tr><td>#ENC-002</td><td style="color:#28a745;">Recibido</td><td>21 Mayo</td></tr>
+      </table>
+    </div>
+
+  </main>
+</body>
+</html>
