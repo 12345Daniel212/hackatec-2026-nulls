@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <nav class="navbar-dark-mode">
@@ -22,7 +24,7 @@
 
   <main class="auth-bg-texture">
     <div class="card-auth-clean">
-      
+
       <div id="step-telefono" class="form-step">
         <h1>Ingresa tu número de celular</h1>
         <div class="phone-row-layout">
@@ -33,7 +35,7 @@
           </div>
         </div>
         <div class="actions-row">
-          <button href="registro.html" class="btn-icon"  onclick="window.location.href='registro.html'">
+          <button href="registro.html" class="btn-icon" onclick="window.location.href='registro.html'">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
           <button class="btn-next" onclick="irANombre()">
@@ -52,7 +54,7 @@
           <button class="btn-icon" onclick="irATelefono()">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-          <button class="btn-next" onclick="alert('Registro completado')">
+          <button class="btn-next" onclick="finalizarRegistro()">
             Finalizar <i class="fa-solid fa-check"></i>
           </button>
         </div>
@@ -62,13 +64,20 @@
   </main>
 
   <script>
+    // Atrapamos los parámetros que vienen heredados desde el cotizador de IA
+    const urlParams = new URLSearchParams(window.location.search);
+    const direccion = urlParams.get('direccion') || "";
+    const base = urlParams.get('base') || "90";
+    const pesoExtra = urlParams.get('pesoExtra') || "0";
+    const total = urlParams.get('total') || "82";
+
     function irANombre() {
       const tel = document.getElementById('step-telefono');
       const nom = document.getElementById('step-nombre');
-      
+
       tel.style.opacity = '0';
       tel.style.transform = 'translateX(-20px)';
-      
+
       setTimeout(() => {
         tel.style.display = 'none';
         nom.style.display = 'block';
@@ -82,10 +91,10 @@
     function irATelefono() {
       const tel = document.getElementById('step-telefono');
       const nom = document.getElementById('step-nombre');
-      
+
       nom.style.opacity = '0';
       nom.style.transform = 'translateX(20px)';
-      
+
       setTimeout(() => {
         nom.style.display = 'none';
         tel.style.display = 'block';
@@ -95,7 +104,17 @@
         }, 50);
       }, 400);
     }
+
+    // NUEVA FUNCIÓN: Envía los datos limpios y listos directamente a la pasarela de pagos
+    function finalizarRegistro() {
+      // Codificamos la dirección para evitar problemas con espacios o caracteres especiales en la URL
+      const dirCodificada = encodeURIComponent(direccion);
+
+      // Redirección directa pasando todos los datos de la cotización
+      window.location.href = `pagos.html?direccion=${dirCodificada}&base=${base}&pesoExtra=${pesoExtra}&total=${total}`;
+    }
   </script>
 
 </body>
+
 </html>

@@ -91,9 +91,8 @@
 
           <div class="ahorro-badge" id="ahorro-texto">¡Ahorraste $8.00 con la suscripción!</div>
 
-          <button class="btn-submit-uber" style="margin-top: 24px;"
-            onclick="alert('¡Pedido confirmado! Tu recolector va en camino al domicilio seleccionado.')">
-            Confirmar y Solicitar Recolección <i class="fa-solid fa-arrow-right"></i>
+          <button class="btn-submit-uber" style="margin-top: 24px;" onclick="irAlRegistro()">
+            Confirmar e Iniciar Sesion para la Recolección <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       </section>
@@ -113,10 +112,15 @@
     const destino = urlParams.get('direccion') || "Dirección predeterminada (No se ingresó ninguna)";
     document.getElementById('destino-texto').innerText = destino;
 
-    // Variables globales para guardar los costos bases calculados
+    // Variables globales para guardar los costos bases calculados y finales
     let precioBaseNormal = 90;
     let precioBaseSubs = 82;
     let esCajaChicaGlobal = true;
+
+    // Variables dinámicas para el envío por URL
+    let totalNormalFinal = 90;
+    let totalSubsFinal = 82;
+    let pesoExtraCalculado = 0;
 
     function simularEscaneo(event) {
       const input = event.target;
@@ -132,7 +136,6 @@
 
           // Efecto de carga del láser de la IA
           setTimeout(() => {
-            // EXPLICITO: Forzamos a que mida menos de 20x20x20 en la primera simulación
             let medX = 15;
             let medY = 18;
             let medZ = 12;
@@ -141,14 +144,11 @@
             precioBaseSubs = 82;
             esCajaChicaGlobal = true;
 
-            // Inyectamos las medidas en la interfaz
             document.getElementById('tag-dimensiones').innerText = `IA: ${medX}x${medY}x${medZ} cm`;
             document.getElementById('detalle-medidas').innerText = `Caja Chica (${medX}x${medY}x${medZ} cm) ocre de tarifa fija`;
 
-            // Renderizar los precios base multiplicados por el peso introducido
             recubicarPrecios();
 
-            // Desplegar las tarjetas de cotización
             document.getElementById('card-vacia').style.display = 'none';
             document.getElementById('card-resultados').style.display = 'block';
           }, 1500);
@@ -157,26 +157,33 @@
       }
     }
 
-    // Calcular el precio final sumando o multiplicando por el peso que meta el usuario
     function recubicarPrecios() {
       const peso = parseFloat(document.getElementById('peso-paquete').value) || 1;
 
       // Si el peso es mayor a 1, le sumamos un extra progresivo de $10 pesos por kilo adicional
-      let extraPeso = (peso - 1) * 10;
-      if (extraPeso < 0) extraPeso = 0;
+      pesoExtraCalculado = (peso - 1) * 10;
+      if (pesoExtraCalculado < 0) pesoExtraCalculado = 0;
 
-      let finalNormal = precioBaseNormal + extraPeso;
-      let finalSubs = precioBaseSubs + extraPeso;
+      totalNormalFinal = precioBaseNormal + pesoExtraCalculado;
+      totalSubsFinal = precioBaseSubs + pesoExtraCalculado;
 
-      // REGLA: Si cuenta con suscripción premium, el precio jamás superará los $100 pesos (Tope máximo)
-      if (finalSubs > 100) {
-        finalSubs = 100;
+      // REGLA: Si cuenta con suscripción premium, el precio jamás superará los $100 pesos
+      if (totalSubsFinal > 100) {
+        totalSubsFinal = 100;
       }
 
       // Imprimir resultados en pantalla
-      document.getElementById('precio-publico').innerText = `$${Math.floor(finalNormal)}.00`;
-      document.getElementById('precio-suscripcion').innerText = `$${Math.floor(finalSubs)}.00`;
-      document.getElementById('ahorro-texto').innerText = `¡Ahorras $${Math.floor(finalNormal - finalSubs)}.00 con la suscripción Premium!`;
+      document.getElementById('precio-publico').innerText = `$${Math.floor(totalNormalFinal)}.00`;
+      document.getElementById('precio-suscripcion').innerText = `$${Math.floor(totalSubsFinal)}.00`;
+      document.getElementById('ahorro-texto').innerText = `¡Ahorras $${Math.floor(totalNormalFinal - totalSubsFinal)}.00 con la suscripción Premium!`;
+    }
+
+    // NUEVA FUNCIÓN: Redirección inteligente que arrastra los datos calculados a registroCel.html
+    function irAlRegistro() {
+      const direccionEscapada = encodeURIComponent(destino);
+
+      // Construimos los parámetros para que la pasarela/registro sepa qué se calculó aquí
+      window.location.href = `registroCel.html?direccion=${direccionEscapada}&base=${precioBaseNormal}&pesoExtra=${Math.floor(pesoExtraCalculado)}&total=${Math.floor(totalSubsFinal)}`;
     }
   </script>
 </body>
