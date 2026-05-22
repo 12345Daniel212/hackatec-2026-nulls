@@ -13,21 +13,110 @@
       transition: opacity 0.4s ease, transform 0.4s ease;
       width: 100%;
     }
+
+    /* STEPPER - BARRA DE PROGRESO PREMIUM */
+    .stepper-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .stepper-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 4px;
+      width: 100%;
+      background: #e0e0e0;
+      z-index: 1;
+      border-radius: 2px;
+    }
+
+    .stepper-progress {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 4px;
+      width: 0%;
+      background: #000000;
+      /* Color negro característico de la marca */
+      z-index: 2;
+      transition: width 0.4s ease;
+      border-radius: 2px;
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 3;
+      transition: all 0.4s ease;
+    }
+
+    .step-dot.active {
+      background: #000000;
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.15);
+    }
+
+    /* CONTENEDOR DE INPUTS CON ICONO INTERNO */
+    .input-icon-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-icon-group i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 18px;
+      transition: color 0.3s ease;
+      z-index: 10;
+    }
+
+    .input-icon-group .input-uber {
+      padding-left: 48px !important;
+    }
+
+    .input-icon-group .input-uber:focus+i {
+      color: #000000;
+    }
   </style>
 </head>
 
 <body>
 
   <nav class="navbar-dark-mode">
-    <img src="../Imagenes/enCaminoLogo.svg" alt="Logo" class="brand-logo-img">
+    <img src="../Imagenes/enCaminoLogo.svg" alt="Logo" class="brand-logo-img" style="cursor: pointer;"
+      onclick="window.location.href='index.html'">
   </nav>
 
   <main class="auth-bg-texture">
     <div class="card-auth-clean">
 
+      <div class="stepper-container">
+        <div class="stepper-line"></div>
+        <div class="stepper-progress" id="progress-bar"></div>
+        <div class="step-dot active" id="dot-1">1</div>
+        <div class="step-dot" id="dot-2">2</div>
+      </div>
+
       <div id="step-telefono" class="form-step">
         <h1>Ingresa tu número de celular</h1>
-        <div class="phone-row-layout">
+        <div class="phone-row-layout" style="margin-bottom: 32px;">
           <div class="input-uber country-box">MX</div>
           <div class="phone-input-wrapper">
             <span class="phone-prefix">+52</span>
@@ -35,7 +124,7 @@
           </div>
         </div>
         <div class="actions-row">
-          <button href="registro.html" class="btn-icon" onclick="window.location.href='registro.html'">
+          <button class="btn-icon" onclick="window.location.href='registro.html'">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
           <button class="btn-next" onclick="irANombre()">
@@ -47,14 +136,23 @@
       <div id="step-nombre" class="form-step" style="display: none; opacity: 0;">
         <h1>Registre su nombre</h1>
         <div class="search-bar-grid" style="display: grid; gap: 16px; margin-bottom: 32px;">
-          <input type="text" class="input-uber" placeholder="Nombre" style="width: 100%;">
-          <input type="text" class="input-uber" placeholder="Apellido" style="width: 100%;">
+
+          <div class="input-icon-group">
+            <input type="text" class="input-uber" id="input-nombre" placeholder="Nombre" style="width: 100%;">
+            <i class="fa-solid fa-user"></i>
+          </div>
+
+          <div class="input-icon-group">
+            <input type="text" class="input-uber" id="input-apellido" placeholder="Apellido" style="width: 100%;">
+            <i class="fa-solid fa-users-rectangle"></i>
+          </div>
+
         </div>
         <div class="actions-row">
           <button class="btn-icon" onclick="irATelefono()">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-          <button class="btn-next" onclick="window.location.href='vendedor.html'">
+          <button class="btn-next" onclick="finalizarRegistro()">
             Finalizar <i class="fa-solid fa-check"></i>
           </button>
         </div>
@@ -71,10 +169,31 @@
     const pesoExtra = urlParams.get('pesoExtra') || "0";
     const total = urlParams.get('total') || "82";
 
+    // Control visual de la barra de progreso
+    function actualizarProgreso(paso) {
+      const progressBar = document.getElementById('progress-bar');
+      const dot2 = document.getElementById('dot-2');
+
+      if (paso === 1) {
+        progressBar.style.width = '0%';
+        dot2.classList.remove('active');
+      } else if (paso === 2) {
+        progressBar.style.width = '100%';
+        dot2.classList.add('active');
+      }
+    }
+
     function irANombre() {
+      const telInput = document.getElementById('input-tel').value;
+      if (telInput.length < 10) {
+        alert("Por favor, ingresa un número de celular válido a 10 dígitos.");
+        return;
+      }
+
       const tel = document.getElementById('step-telefono');
       const nom = document.getElementById('step-nombre');
 
+      actualizarProgreso(2);
       tel.style.opacity = '0';
       tel.style.transform = 'translateX(-20px)';
 
@@ -92,6 +211,7 @@
       const tel = document.getElementById('step-telefono');
       const nom = document.getElementById('step-nombre');
 
+      actualizarProgreso(1);
       nom.style.opacity = '0';
       nom.style.transform = 'translateX(20px)';
 
@@ -105,12 +225,20 @@
       }, 400);
     }
 
-    // NUEVA FUNCIÓN: Envía los datos limpios y listos directamente a la pasarela de pagos
+    // Envía los datos limpios y listos directamente a la pasarela de pagos
     function finalizarRegistro() {
+      const nombre = document.getElementById('input-nombre').value;
+      const apellido = document.getElementById('input-apellido').value;
+
+      if (!nombre || !apellido) {
+        alert("Por favor, introduce tu nombre y apellido para completar tu perfil.");
+        return;
+      }
+
       // Codificamos la dirección para evitar problemas con espacios o caracteres especiales en la URL
       const dirCodificada = encodeURIComponent(direccion);
 
-      // Redirección directa pasando todos los datos de la cotización
+      // Redirección directa pasando todos los datos de la cotización a pagos.html
       window.location.href = `pagos.html?direccion=${dirCodificada}&base=${base}&pesoExtra=${pesoExtra}&total=${total}`;
     }
   </script>

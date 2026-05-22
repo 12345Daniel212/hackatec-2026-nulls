@@ -14,25 +14,107 @@
       width: 100%;
     }
 
-    /* Estilo personalizado para el cargador de fotos adaptado al diseño limpio */
+    /* STEPPER - BARRA DE PROGRESO PREMIUM */
+    .stepper-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .stepper-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 4px;
+      width: 100%;
+      background: #e0e0e0;
+      z-index: 1;
+      border-radius: 2px;
+    }
+
+    .stepper-progress {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 4px;
+      width: 0%;
+      background: #000000;
+      /* Color negro característico */
+      z-index: 2;
+      transition: width 0.4s ease;
+      border-radius: 2px;
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 3;
+      transition: all 0.4s ease;
+    }
+
+    .step-dot.active {
+      background: #000000;
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.15);
+    }
+
+    /* CONTENEDOR DE INPUTS CON ICONO INTERNO */
+    .input-icon-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-icon-group i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    .input-icon-group .input-uber {
+      padding-left: 48px !important;
+    }
+
+    .input-icon-group .input-uber:focus+i {
+      color: #000000;
+    }
+
+    /* CARGADOR DE FOTOS AVANZADO CON PREVIEW */
     .file-upload-wrapper {
       position: relative;
       width: 100%;
-      height: 120px;
-      border: 2px dashed #ccc;
-      border-radius: 8px;
+      height: 160px;
+      border: 2px dashed #bbb;
+      border-radius: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.01);
       cursor: pointer;
       margin-bottom: 32px;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
 
     .file-upload-wrapper:hover {
       border-color: #000;
-      background: rgba(0, 0, 0, 0.02);
+      background: rgba(0, 0, 0, 0.03);
     }
 
     .file-upload-wrapper input[type="file"] {
@@ -41,17 +123,53 @@
       height: 100%;
       opacity: 0;
       cursor: pointer;
+      z-index: 5;
+    }
+
+    .upload-info-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      transition: all 0.3s ease;
     }
 
     .file-upload-wrapper i {
-      font-size: 28px;
-      color: #666;
-      margin-bottom: 8px;
+      font-size: 36px;
+      color: #444;
+      margin-bottom: 10px;
     }
 
     .file-upload-wrapper span {
       font-size: 14px;
-      color: #555;
+      color: #444;
+      font-weight: 500;
+    }
+
+    /* Imagen previsualizada */
+    .preview-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+      z-index: 4;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(1.03);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
   </style>
 </head>
@@ -66,17 +184,30 @@
   <main class="auth-bg-texture">
     <div class="card-auth-clean">
 
+      <div class="stepper-container">
+        <div class="stepper-line"></div>
+        <div class="stepper-progress" id="progress-bar"></div>
+        <div class="step-dot active" id="dot-1">1</div>
+        <div class="step-dot" id="dot-2">2</div>
+        <div class="step-dot" id="dot-3">3</div>
+      </div>
+
       <div id="step-negocio" class="form-step">
         <h1>Registra tu Centro de Distribución (Hub)</h1>
         <div class="search-bar-grid" style="display: grid; gap: 16px; margin-bottom: 32px;">
-          <div class="input-wrapper" style="width: 100%;">
+
+          <div class="input-icon-group">
             <input type="text" class="input-uber" id="nombre-negocio" placeholder="Nombre del negocio o local"
               style="width: 100%;">
+            <i class="fa-solid fa-store"></i>
           </div>
-          <div class="input-wrapper" style="width: 100%;">
+
+          <div class="input-icon-group">
             <input type="text" class="input-uber" id="nombre-encargado" placeholder="Nombre completo del encargado"
               style="width: 100%;">
+            <i class="fa-solid fa-user-tie"></i>
           </div>
+
         </div>
         <div class="actions-row">
           <button class="btn-icon" onclick="window.location.href='index.html'">
@@ -91,8 +222,13 @@
       <div id="step-domicilio" class="form-step" style="display: none; opacity: 0;">
         <h1>¿Dónde se ubica tu Hub?</h1>
         <div class="search-bar-grid" style="display: grid; gap: 16px; margin-bottom: 32px;">
-          <input type="text" class="input-uber" id="domicilio-hub" placeholder="Calle, número, colonia y código postal"
-            style="width: 100%;">
+
+          <div class="input-icon-group">
+            <input type="text" class="input-uber" id="domicilio-hub"
+              placeholder="Calle, número, colonia y código postal" style="width: 100%;">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+
         </div>
         <div class="actions-row">
           <button class="btn-icon" onclick="regresarANegocio()">
@@ -110,9 +246,12 @@
           tu establecimiento más rápido.</p>
 
         <div class="file-upload-wrapper">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-          <span id="file-label">Seleccionar o soltar foto aquí</span>
-          <input type="file" id="foto-lugar" accept="image/*" onchange="mostrarNombreArchivo()">
+          <img id="preview-image" class="preview-img" alt="Vista previa de la fachada">
+          <div class="upload-info-box" id="upload-prompt">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span id="file-label">Seleccionar o soltar foto aquí</span>
+          </div>
+          <input type="file" id="foto-lugar" accept="image/*" onchange="manejarFoto()">
         </div>
 
         <div class="actions-row">
@@ -129,13 +268,44 @@
   </main>
 
   <script>
-    // Mostrar el nombre del archivo cuando se suba a la foto
-    function mostrarNombreArchivo() {
+    // Control visual de la barra de progreso
+    function actualizarProgreso(paso) {
+      const progressBar = document.getElementById('progress-bar');
+      const dot2 = document.getElementById('dot-2');
+      const dot3 = document.getElementById('dot-3');
+
+      if (paso === 1) {
+        progressBar.style.width = '0%';
+        dot2.classList.remove('active');
+        dot3.classList.remove('active');
+      } else if (paso === 2) {
+        progressBar.style.width = '50%';
+        dot2.classList.add('active');
+        dot3.classList.remove('active');
+      } else if (paso === 3) {
+        progressBar.style.width = '100%';
+        dot2.classList.add('active');
+        dot3.classList.add('active');
+      }
+    }
+
+    // Procesa la foto subida y muestra la previsualización mamalona
+    function manejarFoto() {
       const input = document.getElementById('foto-lugar');
+      const preview = document.getElementById('preview-image');
+      const promptBox = document.getElementById('upload-prompt');
       const label = document.getElementById('file-label');
-      if (input.files.length > 0) {
-        label.innerText = input.files[0].name;
-        label.style.color = "#000";
+
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block'; // Muestra la foto
+          promptBox.style.opacity = '0';   // Oculta el texto base suavemente
+        }
+
+        reader.readAsDataURL(input.files[0]);
       }
     }
 
@@ -149,6 +319,7 @@
         return;
       }
 
+      actualizarProgreso(2);
       negocio.style.opacity = '0';
       negocio.style.transform = 'translateX(-20px)';
 
@@ -167,6 +338,7 @@
       const negocio = document.getElementById('step-negocio');
       const domicilio = document.getElementById('step-domicilio');
 
+      actualizarProgreso(1);
       domicilio.style.opacity = '0';
       domicilio.style.transform = 'translateX(20px)';
 
@@ -190,6 +362,7 @@
         return;
       }
 
+      actualizarProgreso(3);
       domicilio.style.opacity = '0';
       domicilio.style.transform = 'translateX(-20px)';
 
@@ -208,6 +381,7 @@
       const domicilio = document.getElementById('step-domicilio');
       const foto = document.getElementById('step-foto');
 
+      actualizarProgreso(2);
       foto.style.opacity = '0';
       foto.style.transform = 'translateX(20px)';
 
@@ -230,7 +404,6 @@
       }
 
       alert("¡Registro enviado con éxito! Bienvenido a la red de EnCamino.");
-      // MODIFICACIÓN: Redirección directa hacia la interfaz de microhub.html
       window.location.href = "microhub.html";
     }
   </script>
