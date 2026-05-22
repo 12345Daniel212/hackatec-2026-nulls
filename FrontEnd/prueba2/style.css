@@ -53,6 +53,15 @@ body {
   text-transform: capitalize;
 }
 
+.brand-logo-img {
+  height: 38px;
+  /* Altura perfecta para que no desborde los 72px de la navbar */
+  width: auto;
+  /* Mantiene la proporción horizontal original del vector */
+  display: block;
+  object-fit: contain;
+}
+
 .menu-burger {
   font-size: 20px;
   cursor: pointer;
@@ -125,7 +134,7 @@ body {
   position: relative;
   /* Imagen premium de fletes y logística internacional garantizada */
   background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05)),
-    url('https://images.pexels.com/photos/4488510/pexels-photo-4488510.jpeg?auto=compress&cs=tinysrgb&w=1800');
+    url('https://images.pexels.com/photos/6169668/pexels-photo-6169668.jpeg?auto=compress&cs=tinysrgb&w=1800');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
