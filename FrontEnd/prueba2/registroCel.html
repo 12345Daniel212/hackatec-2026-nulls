@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnCamino | Ingresa tu número móvil</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <nav class="navbar" style="background-color: #000000;">
+    <div class="nav-left">
+      <div class="logo-container" onclick="window.location.href='index.html'">
+        <img src="../Imagenes/enCaminoLogo.svg" alt="EnCamino Logo" class="brand-logo-img" style="filter: brightness(0) invert(1);">
+      </div>
+    </div>
+  </nav>
+
+  <main class="hero-container" style="background: #ffffff; display: flex; justify-content: center; align-items: center;">
+
+    <div class="main-card" style="box-shadow: 0 16px 48px rgba(0,0,0,0.08); border: 1px solid #f0f0f0; max-width: 460px;">
+      
+      <h1 style="font-size: 28px; margin-bottom: 36px; letter-spacing: -0.5px;">
+        Ingresa tu número de teléfono móvil
+      </h1>
+
+      <div class="search-bar-grid" style="grid-template-columns: 0.6fr 1.4fr; gap: 12px; margin-bottom: 48px;">
+        
+        <div class="input-wrapper">
+          <div class="input-uber select-uber" style="display: flex; align-items: center; justify-content: space-between; padding: 0 16px; cursor: default;">
+            <span>MX</span>
+            <i class="fa-solid fa-chevron-down" style="position: static; font-size: 12px; color: #333333;"></i>
+          </div>
+        </div>
+
+        <div class="input-wrapper">
+          <span style="position: absolute; left: 16px; font-size: 16px; font-weight: 500; color: #000000; z-index: 5;">+52</span>
+          <input type="tel" class="input-uber" id="direccion-origen" placeholder="222 123 4567" maxlength="10" style="padding-left: 54px;" required autofocus autocomplete="tel">
+        </div>
+
+      </div>
+
+      <div class="tracking-input-group" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        
+        <button type="button" class="btn-submit-uber btn-track" onclick="window.history.back()" style="border-radius: 50%; background-color: #f3f3f3; color: #000000;" title="Volver atrás">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <button type="button" class="btn-submit-uber" id="codigo-rastreo" onclick="validarFormulario()" style="border-radius: 30px; width: auto; padding: 0 32px;">
+          Siguiente <i class="fa-solid fa-arrow-right icon-flecha"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    function validarFormulario() {
+      // Usamos el ID del input para capturar el valor
+      const telefono = document.getElementById('direccion-origen').value.replace(/\s+/g, '');
+      
+      if (!telefono || telefono.length < 10) {
+        alert("Por favor, ingresa un número de teléfono válido a 10 dígitos.");
+        return;
+      }
+      alert("Código de verificación enviado correctamente al número: +52 " + telefono);
+    }
+  </script>
+
+</body>
+</html>
