@@ -192,13 +192,14 @@
       }
     }
 
+    // FUNCIÓN MODIFICADA: Ahora redirige a rastreo.html pasando el código por URL
     function rastrearPedido() {
       const codigo = document.getElementById('codigo-rastreo').value;
       if (!codigo) {
         alert("Debes ingresar un código de rastreo válido.");
         return;
       }
-      alert("Buscando el estado del paquete: " + codigo + " en la base de datos...");
+      window.location.href = "rastreo.html?codigo=" + encodeURIComponent(codigo);
     }
   </script>
 
