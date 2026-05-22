@@ -4,14 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EnCamino | Red de Distribución Logística</title>
+  <title>EnCamino | Menu</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-container" onclick="window.location.reload()">
@@ -19,17 +18,15 @@
       </div>
     </div>
     <div class="nav-right">
-      <a href="#" class="nav-link-partner"><i class="fa-solid fa-truck-ramp-box"></i> Registrarme como centro de
-        distribución</a>
+
       <button class="btn-nav btn-login">Iniciar sesión</button>
-      <button class="btn-nav btn-register">Regístrate</button>
+      <a href="registro.html" class="btn-nav btn-register">Regístrate</a>
     </div>
   </nav>
 
   <header class="hero-container">
     <div class="main-card">
-      <h1>Cotizar con IA a dónde vas a mandar tu paquete</h1>
-
+      <h1>Cotizar con <span class="ai-brillo">IA</span> a dónde vas a mandar tu paquete</h1>
       <div class="search-bar-full">
         <div class="input-wrapper">
           <i class="fa-solid fa-box-archive"></i>
@@ -74,8 +71,8 @@
         onclick="document.getElementById('promo-banner').style.display='none'"></i>
     </div>
   </header>
-
   <section class="uber-cards-section">
+
     <div class="uber-card">
       <div class="card-image-box">
         <img src="https://images.pexels.com/photos/6169668/pexels-photo-6169668.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -102,6 +99,7 @@
       <h3>Haz entregas con la app de EnCamino</h3>
       <a href="#" class="uber-card-link">Regístrate para realizar entregas</a>
     </div>
+
   </section>
 
   <section class="uber-map-section">
@@ -110,15 +108,70 @@
       <a href="#" class="map-link">Conoce nuestros más de 50 Hubs</a>
     </div>
 
-    <div class="map-container-box">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d118844.75783307567!2d-104.8948127!3d21.5039276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1710000000000!5m2!1ses-419!2smx"
-        allowfullscreen="" loading="lazy"></iframe>
+    <div class="map-container-box"
+      style="position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+
+      <div class="map-wrapper" style="width: 100%; height: 100%;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d118844.75783307567!2d-104.8948127!3d21.5039276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1710000000000!5m2!1ses-419!2smx"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <div class="live-marker">
+        <i class="fa-solid fa-warehouse"></i>
+        <div class="pulse"></div>
+      </div>
+
+      <div class="tracking-floating-card"
+        style="top: 24px; left: 24px; position: absolute; max-width: 360px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+        <div class="tracking-header">
+          <div>
+            <h2>Hub Central Tepic</h2>
+            <p>Código: #HUB-NTE-2026</p>
+          </div>
+          <span class="status-badge">Activo</span>
+        </div>
+
+        <div class="driver-info" style="padding: 12px;">
+          <div class="driver-avatar"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <div class="driver-details">
+            <h4>Paquetes en tránsito</h4>
+            <p>Tepic y Zona Metropolitana</p>
+          </div>
+        </div>
+
+        <hr class="divider" style="margin: 16px 0;">
+
+        <div class="timeline">
+          <div class="timeline-step completed">
+            <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="step-text">
+              <strong>Entradas Verificadas</strong>
+              <p>Clasificación automatizada completada</p>
+            </div>
+          </div>
+          <div class="timeline-step active">
+            <div class="step-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+            <div class="step-text">
+              <strong>Rutas de Despacho</strong>
+              <p>Unidades en carga pesada</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <footer class="main-footer">
-    <p>&copy; 2026 EnCamino Logística S.A. de C.V. Todos los derechos reservados.</p>
+    <div class="footer-bottom">
+      <p>© 2026 EnCamino Logística S.A. de C.V. Todos los derechos reservados.</p>
+      <div class="footer-legal-links">
+        <a href="#">Privacidad</a>
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Accesibilidad</a>
+      </div>
+    </div>
   </footer>
 
   <script>
