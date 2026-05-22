@@ -1,0 +1,384 @@
+/* ==========================================================================
+   1. RESETEO Y TIPOGRAFÍA CORPORATIVA
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. NAVBAR SUPERIOR FIJA
+   ========================================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 64px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.brand-logo {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -1.2px;
+  color: #000000;
+  cursor: pointer;
+  text-transform: lowercase;
+}
+
+.brand-logo span {
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.menu-burger {
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.menu-burger:hover {
+  transform: scale(1.15);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link-partner {
+  color: #000000;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 30px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link-partner:hover {
+  background-color: #f3f3f3;
+}
+
+/* BOTONES DEL MENÚ */
+.btn-nav {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-login {
+  background-color: #f3f3f3;
+  color: #000000;
+}
+
+.btn-login:hover {
+  background-color: #e2e2e2;
+}
+
+.btn-register {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn-register:hover {
+  background-color: #1f1f1f;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   3. HERO BANNER CON FOTO DE PAQUETES DE ALTA DISPONIBILIDAD
+   ========================================================================== */
+.hero-container {
+  margin-top: 72px;
+  height: calc(100vh - 72px);
+  position: relative;
+  /* Imagen premium de fletes y logística internacional garantizada */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05)),
+    url('https://images.pexels.com/photos/4488510/pexels-photo-4488510.jpeg?auto=compress&cs=tinysrgb&w=1800');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  padding: 0 64px;
+}
+
+/* ==========================================================================
+   4. PANEL DE CONTROL INTERACTIVO (MAIN CARD)
+   ========================================================================== */
+.main-card {
+  position: relative;
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 48px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15);
+  /* Animación mamalona de entrada */
+  animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.main-card h1 {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+  margin-bottom: 36px;
+  color: #000000;
+}
+
+/* INPUTS EN PARALELO */
+.search-bar-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 16px;
+  color: #000000;
+  font-size: 18px;
+  z-index: 5;
+}
+
+.input-uber {
+  width: 100%;
+  height: 56px;
+  background-color: #f3f3f3;
+  border: 2px solid transparent;
+  padding: 0 16px 0 48px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.input-uber:focus {
+  background-color: #ffffff;
+  border-color: #000000;
+}
+
+/* Selector custom de Uber */
+.select-uber {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 40px !important;
+}
+
+.input-wrapper .text-arrow {
+  left: auto;
+  right: 16px;
+  font-size: 12px;
+  color: #333333;
+  pointer-events: none;
+}
+
+/* BOTÓN NEGRO MASIVO */
+.btn-submit-uber {
+  width: 100%;
+  height: 56px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-submit-uber:hover {
+  background-color: #222222;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit-uber .icon-flecha {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-submit-uber:hover .icon-flecha {
+  transform: translateX(6px);
+}
+
+/* LINK DE REGISTRO DE CENTRO DE DISTRIBUCIÓN */
+.action-container {
+  margin-top: 24px;
+}
+
+.secondary-action {
+  display: inline-block;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.secondary-action::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.secondary-action:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* ==========================================================================
+   5. FOOTER DE PROMOCIONES (Tono café ocre/dorado de Uber One)
+   ========================================================================== */
+.promo-footer-banner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #785119;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 64px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  animation: fadeInDelay 1.2s ease forwards;
+}
+
+.promo-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-promo {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.promo-footer-banner .close-promo {
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.promo-footer-banner .close-promo:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   6. ANIMACIONES DE ENTRADA INTERACTIVAS
+   ========================================================================== */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDelay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   7. ADAPTACIÓN PARA CELULARES (RESPONSIVO)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 24px;
+  }
+
+  .hero-container {
+    padding: 0 24px;
+    justify-content: center;
+  }
+
+  .search-bar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-link-partner,
+  .nav-left span {
+    display: none;
+  }
+
+  .main-card {
+    padding: 32px;
+  }
+
+  .main-card h1 {
+    font-size: 32px;
+  }
+
+  .promo-footer-banner {
+    padding: 0 24px;
+    font-size: 13px;
+  }
+}
