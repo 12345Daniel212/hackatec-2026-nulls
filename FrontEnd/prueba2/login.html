@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnCamino | Iniciar Sesión</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo-container" onclick="window.location.href='index.html'" style="cursor: pointer;">
+        <img src="../Imagenes/enCaminoLogo.svg" alt="EnCamino Logo" class="brand-logo-img">
+      </div>
+    </div>
+    <div class="nav-right">
+      <span style="font-size: 14px; color: #888;">¿Nuevo aquí?</span>
+      <button class="btn-nav btn-register" onclick="window.location.href='registro.html'">Regístrate</button>
+    </div>
+  </nav>
+
+  <main class="login-wrapper">
+    
+    <div class="login-image-side">
+      <div class="login-image-overlay">
+        <h2>La logística<br>de Tepic evoluciona.</h2>
+        <p>Gestiona tus rutas y monitorea tus paquetes con IA.</p>
+      </div>
+    </div>
+
+    <div class="login-form-side">
+      <div class="login-form-container">
+        
+        <h1>Iniciar Sesión</h1>
+        <p class="form-subtitle">Bienvenido de vuelta, socio.</p>
+        
+        <form id="formLogin">
+          <div class="input-wrapper" style="margin-bottom: 20px;">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" class="input-uber" id="email-login" placeholder="Correo electrónico" required>
+          </div>
+
+          <div class="input-wrapper" style="margin-bottom: 30px;">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" class="input-uber" id="pass-login" placeholder="••••••••" required>
+          </div>
+
+          <button type="button" class="btn-submit-uber" onclick="validarLogin()">
+            Entrar a mi cuenta <i class="fa-solid fa-arrow-right icon-flecha"></i>
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function validarLogin() {
+      const btn = document.querySelector('.btn-submit-uber');
+      btn.innerHTML = 'Accediendo...';
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 600);
+    }
+  </script>
+</body>
+</html>

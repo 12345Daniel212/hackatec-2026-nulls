@@ -1434,6 +1434,7 @@ body {
     /* Forzamos un barrido completo continuo */
   }
 }
+<<<<<<< HEAD
 
 /* ==========================================================================
    8. VENTANA DE AUTENTICACIÓN TELEFÓNICA (ENLACE LIMPIO)
@@ -1575,4 +1576,95 @@ body {
   margin-top: 72px;
   height: calc(100vh - 72px);
   width: 100%;
+=======
+/* --- ESTILOS DE LOGIN PREMIUM --- */
+.login-wrapper {
+  display: flex;
+  height: 100vh;
+  margin-top: 72px;
+}
+
+.login-image-side {
+  flex: 1.2;
+  background-image: url('https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.login-image-overlay {
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  color: white;
+}
+
+.login-form-side {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+/* Contenedor del formulario con estilo "caja" */
+.login-form-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 50px;
+  background-color: #ffffff;
+  /* Aquí está la "caja" que pediste */
+  border: 1px solid #e0e0e0; 
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  /* Animación de entrada */
+  animation: entrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Ajuste para separar mejor el título del formulario */
+.login-form-container h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+/* Badge estilizado */
+.badge-live {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px; 
+  background: #000; 
+  color: #fff; 
+  padding: 6px 16px; 
+  border-radius: 20px; 
+  font-size: 10px; 
+  font-weight: 700; 
+  margin-bottom: 20px;
+}
+
+/* Mejora de input y botón */
+.input-wrapper { position: relative; }
+.input-wrapper i { position: absolute; left: 16px; top: 19px; color: #888; }
+.input-uber { padding-left: 45px !important; }
+
+/* Animación de entrada general */
+@keyframes entrance {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .login-image-side { display: none; }
+  .login-wrapper { margin-top: 0; }
+>>>>>>> acb4e08b05f3beabab3c4b4a7bf2c70be06eb2f1
 }

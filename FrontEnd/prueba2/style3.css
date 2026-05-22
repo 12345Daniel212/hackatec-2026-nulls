@@ -1,0 +1,796 @@
+/* ==========================================================================
+   1. RESETEO Y TIPOGRAFÍA CORPORATIVA
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   2. NAVBAR SUPERIOR FIJA
+   ========================================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 64px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.logo-container {
+  cursor: pointer;
+}
+
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* BOTONES DEL MENÚ */
+.btn-nav {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-login {
+  background-color: #f3f3f3;
+  color: #000000;
+}
+
+.btn-login:hover {
+  background-color: #e2e2e2;
+}
+
+.btn-register {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn-register:hover {
+  background-color: #1f1f1f;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   3. HERO BANNER (PÁGINA DE INICIO)
+   ========================================================================== */
+.hero-container {
+  margin-top: 72px;
+  height: calc(100vh - 72px);
+  position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05)),
+    url('https://images.pexels.com/photos/6169668/pexels-photo-6169668.jpeg?auto=compress&cs=tinysrgb&w=1800');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  padding: 0 64px;
+}
+
+/* PANEL DE CONTROL INTERACTIVO (MAIN CARD) */
+.main-card {
+  position: relative;
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 48px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15);
+  animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.main-card h1 {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+  margin-bottom: 36px;
+  color: #000000;
+}
+
+.search-bar-full {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 16px;
+  color: #000000;
+  font-size: 18px;
+  z-index: 5;
+}
+
+.input-uber {
+  width: 100%;
+  height: 56px;
+  background-color: #f3f3f3;
+  border: 2px solid transparent;
+  padding: 0 16px 0 48px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.input-uber:focus {
+  background-color: #ffffff;
+  border-color: #000000;
+}
+
+/* BOTÓN NEGRO MASIVO */
+.btn-submit-uber {
+  width: 100%;
+  height: 56px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-submit-uber:hover {
+  background-color: #222222;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit-uber .icon-flecha {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-submit-uber:hover .icon-flecha {
+  transform: translateX(6px);
+}
+
+.action-container {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.secondary-action {
+  display: inline-block;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.track-action {
+  color: #555555;
+}
+
+.track-action:hover {
+  color: #000000;
+}
+
+.secondary-action::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.secondary-action:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* ACORDEÓN DE RASTREO */
+.tracking-slideboard {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(-10px);
+}
+
+.tracking-slideboard.active {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 8px;
+  transform: translateY(0);
+}
+
+.tracking-input-group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn-track {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+/* BANNER INFERIOR DE PROMOCIÓN */
+.promo-footer-banner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #785119;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 64px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  animation: fadeInDelay 1.2s ease forwards;
+}
+
+.promo-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-promo {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.promo-footer-banner .close-promo {
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.promo-footer-banner .close-promo:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   4. EFECTO DE BRILLO ULTRA RÁPIDO - TEXTO IA (ESTILO GEMINI)
+   ========================================================================== */
+.ai-brillo {
+  font-weight: 800;
+  background: linear-gradient(45deg,
+      #4285f4,
+      #9b51e0,
+      #e91e63,
+      #00f2fe,
+      #4285f4);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: brilloGeminiRapido 1.2s linear infinite;
+  text-shadow: 0 0 15px rgba(155, 81, 224, 0.3);
+}
+
+@keyframes brilloGeminiRapido {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* ==========================================================================
+   5. SECCIÓN DE TARJETAS (GRID DE COLUMNAS)
+   ========================================================================== */
+.uber-cards-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 64px;
+  background-color: #ffffff;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.uber-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.card-image-box {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.uber-card:hover .card-image-box img {
+  transform: scale(1.03);
+}
+
+.uber-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+.uber-card-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+  border-bottom: 1px solid #000000;
+  width: fit-content;
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.uber-card-link:hover {
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   6. SECCIÓN DEL MAPA INTERACTIVO (HOME)
+   ========================================================================== */
+.uber-map-section {
+  padding: 0 64px 64px 64px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.map-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.map-link {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.map-container-box {
+  width: 100%;
+  height: 450px;
+}
+
+/* ==========================================================================
+   7. INTERFAZ NUEVA: PANTALLA COTIZADOR IA (DOS COLUMNAS & ESCÁNER)
+   ========================================================================== */
+.cotizador-container {
+  margin-top: 72px;
+  padding: 64px;
+  background-color: #f8f9fa;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cotizador-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.panel-scanner {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+}
+
+.address-selected-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #f3f3f3;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  border-left: 4px solid #000000;
+}
+
+.address-selected-badge span {
+  display: block;
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.panel-scanner h2 {
+  font-size: 32px;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+
+.scanner-desc {
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* CAJA DE SIMULACIÓN DE CÁMARA PROTOTIPO */
+.dropzone-camara {
+  border: 3px dashed #cccccc;
+  border-radius: 12px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.dropzone-camara:hover {
+  border-color: #000000;
+  background-color: #f3f3f3;
+}
+
+#preview-placeholder {
+  text-align: center;
+  color: #555;
+  padding: 20px;
+}
+
+.icon-camara {
+  font-size: 48px;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+#preview-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#preview-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* LÍNEA LÁSER DE ESCANEO DE LA IA */
+.laser-scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #e91e63, #9b51e0, transparent);
+  box-shadow: 0 0 12px #e91e63;
+  animation: laserScan 2s linear infinite;
+}
+
+@keyframes laserScan {
+  0% {
+    top: 0%;
+  }
+
+  50% {
+    top: 100%;
+  }
+
+  100% {
+    top: 0%;
+  }
+}
+
+.ai-dimensions-tag {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+/* PANEL DE RESULTADOS DERECHO */
+.panel-resultados {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-resultados h3 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+.card-precio-vacia {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #999;
+  border: 1px dashed #e2e2e2;
+  border-radius: 8px;
+  padding: 40px 20px;
+}
+
+.card-precio-vacia i {
+  font-size: 44px;
+  margin-bottom: 16px;
+  color: #ccc;
+}
+
+/* FILAS DE COTIZACIÓN PRECIOS */
+.precio-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.precio-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.precio-info p {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.precio-monto {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.vip-row {
+  background-color: #fdf8f0;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #f5ebd5;
+  margin-top: 16px;
+}
+
+.vip-monto {
+  color: #785119;
+  font-size: 26px;
+}
+
+.ahorro-badge {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ==========================================================================
+   8. FOOTER CORPORATIVO PREMIUM BLACK
+   ========================================================================== */
+.main-footer {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 48px 64px 32px 64px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-bottom p {
+  color: #777777;
+  font-size: 13px;
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal-links a {
+  color: #777777;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.footer-legal-links a:hover {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   9. CONFIGURACIONES DE ANIMACIÓN & RESPONSIVO GENERAL
+   ========================================================================== */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDelay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 24px;
+  }
+
+  .hero-container {
+    padding: 0 24px;
+    justify-content: center;
+  }
+
+  .main-card {
+    padding: 32px;
+  }
+
+  .main-card h1 {
+    font-size: 32px;
+  }
+
+  .uber-cards-section {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+  }
+
+  .uber-map-section {
+    padding: 0 24px 32px 24px;
+  }
+
+  .map-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .cotizador-container {
+    padding: 24px;
+  }
+
+  .cotizador-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .panel-scanner,
+  .panel-resultados {
+    padding: 24px;
+  }
+
+  .footer-bottom {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .footer-legal-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
