@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-container" onclick="window.location.href='index.html'" style="cursor: pointer;">
@@ -23,7 +22,6 @@
   </nav>
 
   <main class="login-wrapper">
-    
     <div class="login-image-side">
       <div class="login-image-overlay">
         <h2>La logística<br>de Tepic evoluciona.</h2>
@@ -33,7 +31,6 @@
 
     <div class="login-form-side">
       <div class="login-form-container">
-        
         <h1>Iniciar Sesión</h1>
         <p class="form-subtitle">Bienvenido de vuelta, socio.</p>
         
@@ -52,17 +49,8 @@
             Entrar a mi cuenta <i class="fa-solid fa-arrow-right icon-flecha"></i>
           </button>
         </form>
-
       </div>
     </div>
   </main>
-
-  <script>
-    function validarLogin() {
-      const btn = document.querySelector('.btn-submit-uber');
-      btn.innerHTML = 'Accediendo...';
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 600);
-    }
-  </script>
 </body>
 </html>
