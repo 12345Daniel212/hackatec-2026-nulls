@@ -1396,8 +1396,6 @@ body {
 }
 
 
-
-
 /* ==========================================================================
    EFECTO DE BRILLO ULTRA RÁPIDO PARA LA PALABRA IA (ESTILO GEMINI VELOZ)
    ========================================================================== */
@@ -1435,4 +1433,146 @@ body {
     background-position: 300% 50%;
     /* Forzamos un barrido completo continuo */
   }
+}
+
+/* ==========================================================================
+   8. VENTANA DE AUTENTICACIÓN TELEFÓNICA (ENLACE LIMPIO)
+   ========================================================================== */
+
+/* Fondo con textura de micro-puntos premium y discreta */
+.auth-bg-texture {
+  background-color: #fafafa;
+  background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+  background-size: 24px 24px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  margin-top: 72px;
+  height: calc(100vh - 72px);
+}
+
+/* Forzar la barra de navegación superior a negro en esta ventana */
+.navbar-dark-mode {
+  background-color: #000000 !important;
+  border-bottom: 1px solid #111111;
+}
+
+/* Invertir el logo a blanco nítido */
+.navbar-dark-mode .brand-logo-img {
+  filter: brightness(0) invert(1);
+  height: 32px;
+}
+
+/* Ajuste específico para la tarjeta con sombra ultra difuminada */
+.card-auth-clean {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.03) !important; 
+  border: 1px solid #eaeaea !important; 
+  max-width: 460px;
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.card-auth-clean h1 {
+  font-size: 28px;
+  margin-bottom: 32px;
+  letter-spacing: -0.6px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Modificación de la malla para el selector MX y el Input */
+.phone-row-layout {
+  grid-template-columns: 0.55fr 1.45fr !important;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+/* Caja estática para el país MX */
+.country-box-style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  cursor: default;
+  background-color: #f3f3f3;
+}
+
+.country-box-style span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.country-box-style i {
+  position: static !important;
+  font-size: 11px;
+  color: #555555;
+}
+
+/* Prefijo +52 posicionado correctamente */
+.phone-prefix-label {
+  position: absolute;
+  left: 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000000;
+  z-index: 5;
+}
+
+/* Input con espacio izquierdo para no encimar las letras */
+.input-phone-spacing {
+  padding-left: 54px !important;
+  background-color: #f3f3f3 !important;
+}
+
+/* Ajustes para la fila de botones inferiores */
+.actions-row-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Botón circular gris de retorno */
+.btn-back-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50% !important; 
+  background-color: #f3f3f3 !important; 
+  color: #000000 !important;
+  padding: 0 !important;
+  flex-shrink: 0;
+}
+
+.btn-back-circle i {
+  position: static !important;
+  font-size: 16px;
+}
+
+/* Variación del botón siguiente estilo píldora/cápsula */
+.btn-submit-pill {
+  border-radius: 30px !important; 
+  width: auto !important; 
+  padding: 0 28px !important;
+  height: 52px !important;
+  font-size: 15px;
+}
+
+.btn-submit-pill i {
+  font-size: 14px;
+}
+
+.auth-bg-texture {
+  /* Fondo gris claro con textura premium */
+  background-color: #f9f9f9; 
+  
+  /* Textura de circuitos/líneas */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 10 L30 40 L70 40 L100 10 M100 60 L80 80 L20 80 L0 60 M50 0 L50 100' stroke='%23cccccc' stroke-width='1.5' fill='none' opacity='0.8'/%3E%3C/svg%3E");
+  
+  background-size: 150px 150px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  margin-top: 72px;
+  height: calc(100vh - 72px);
+  width: 100%;
 }
